@@ -1,0 +1,12 @@
+132bcf53f7492d077a0aa71c3ed90320 *DESCRIPTION
+c4de58aa7f8c8a828134919ef1438dec *NAMESPACE
+39b0b9eaa46dba4ab5a52ee0407e9cf8 *R/lotri.R
+590a62c14a5328ea5ea2c209da3562ec *README.md
+6c1832d5202ee21d7121d9877e5b70a1 *build/vignette.rds
+4f895458fcff9f17584cac4955ca8710 *inst/doc/lotri-motivation.R
+d69036f64684e4d71c8072635c971bef *inst/doc/lotri-motivation.Rmd
+38ac24c5f10981cd09870d76c9ebfe3c *inst/doc/lotri-motivation.html
+a0b764fb8588250b311db2154e2648e6 *man/lotri.Rd
+3cd48107401dd8e3059f5e83353e74a6 *tests/testthat.R
+1b9bc1aa979c4458313612156fbd375e *tests/testthat/test-lotri.R
+d69036f64684e4d71c8072635c971bef *vignettes/lotri-motivation.Rmd

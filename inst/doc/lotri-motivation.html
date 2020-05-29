@@ -12,7 +12,7 @@
 
 <meta name="author" content="Matthew Fidler" />
 
-<meta name="date" content="2020-02-11" />
+<meta name="date" content="2020-05-29" />
 
 <title>Lotri Motivation</title>
 
@@ -20,41 +20,69 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
 </style>
 <script>
@@ -81,7 +109,187 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -95,7 +303,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Lotri Motivation</h1>
 <h4 class="author">Matthew Fidler</h4>
-<h4 class="date">2020-02-11</h4>
+<h4 class="date">2020-05-29</h4>
 
 
 
@@ -103,82 +311,140 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>Motivation</h1>
 <p>This was made to allow people (like me) to specify lower triangular matrices similar to the domain specific language implemented in nlmixr. Originally I had it included in <code>RxODE</code>, but thought it may have more general applicability, so I separated it into a new package.</p>
 <p>For me, specifying the matrices in this way is easier than specifying them using R’s default matrix. For instance to fully specify a simple 2x2 matrix, in R you specify:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">dimnames=</span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">dimnames=</span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</span></code></pre></div>
 <p>With <code>lotri</code>, you simply specify:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lotri)
-
-mat &lt;-<span class="st"> </span><span class="kw">lotri</span>(a<span class="op">+</span>b <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
-                     <span class="fl">0.5</span>, <span class="dv">1</span>))</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(lotri)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">library</span>(microbenchmark)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>mat &lt;-<span class="st"> </span><span class="kw">lotri</span>(a<span class="op">+</span>b <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>                     <span class="fl">0.5</span>, <span class="dv">1</span>))</span></code></pre></div>
 <p>I find it more legible and easier to specify, especially if you have a more complex matrix. For instance with the more complex matrix:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">lotri</span>({
-    a<span class="op">+</span>b <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
-            <span class="fl">0.5</span>, <span class="dv">1</span>)
-    c <span class="op">~</span><span class="st"> </span><span class="dv">1</span>
-    d <span class="op">+</span>e <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
-             <span class="fl">0.5</span>, <span class="dv">1</span>)
-})</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>mat &lt;-<span class="st"> </span><span class="kw">lotri</span>({</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    a<span class="op">+</span>b <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>            <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    c <span class="op">~</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    d <span class="op">+</span>e <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>             <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>})</span></code></pre></div>
 <p>To fully specify this in base R you would need to use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,
-                <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,
-                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,
-                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>,
-                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),
-              <span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">5</span>,
-              <span class="dt">dimnames=</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>)))</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb4-2"><a href="#cb4-2"></a>                <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
+<span id="cb4-6"><a href="#cb4-6"></a>              <span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">5</span>,</span>
+<span id="cb4-7"><a href="#cb4-7"></a>              <span class="dt">dimnames=</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>)))</span></code></pre></div>
 <p>Of course with the excellent <code>Matrix</code> package this is a bit easier:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Matrix)
-mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">dimnames=</span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))
-mat &lt;-<span class="st"> </span><span class="kw">bdiag</span>(<span class="kw">list</span>(mat, <span class="kw">matrix</span>(<span class="dv">1</span>), mat))
-## Convert back to standard matrix
-mat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat)
-##
-<span class="kw">dimnames</span>(mat) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">library</span>(Matrix)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">dimnames=</span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</span>
+<span id="cb5-3"><a href="#cb5-3"></a>mat &lt;-<span class="st"> </span><span class="kw">bdiag</span>(<span class="kw">list</span>(mat, <span class="kw">matrix</span>(<span class="dv">1</span>), mat))</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## Convert back to standard matrix</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>mat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat)</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">##</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">dimnames</span>(mat) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>))</span></code></pre></div>
 <p>Regardless, I think <code>lotri</code> is a bit easier to use.</p>
 </div>
 <div id="creating-lists-of-matricies-with-attached-properties" class="section level1">
 <h1>Creating lists of matricies with attached properties</h1>
 <p><code>lotri</code> also allows lists of matrices to be created by conditioning on an <code>id</code> with the <code>|</code> syntax.</p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">lotri</span>({
-    a<span class="op">+</span>b <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
-            <span class="fl">0.5</span>, <span class="dv">1</span>) <span class="op">|</span><span class="st"> </span>id
-    c <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>occ
-    d <span class="op">+</span>e <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
-             <span class="fl">0.5</span>, <span class="dv">1</span>) <span class="op">|</span><span class="st"> </span><span class="kw">id</span>(<span class="dt">lower=</span><span class="dv">3</span>, <span class="dt">upper=</span><span class="dv">2</span>, <span class="dt">omegaIsChol=</span><span class="ot">FALSE</span>)
-})
-
-<span class="kw">print</span>(mat)
-<span class="co">#&gt; $id</span>
-<span class="co">#&gt;     d   e</span>
-<span class="co">#&gt; d 1.0 0.5</span>
-<span class="co">#&gt; e 0.5 1.0</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $occ</span>
-<span class="co">#&gt;   c</span>
-<span class="co">#&gt; c 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Properties: lower, upper, omegaIsChol</span>
-
-<span class="kw">print</span>(mat<span class="op">$</span>lower)
-<span class="co">#&gt; $id</span>
-<span class="co">#&gt; d e </span>
-<span class="co">#&gt; 3 3 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $occ</span>
-<span class="co">#&gt; NULL</span>
-<span class="kw">print</span>(mat<span class="op">$</span>upper)
-<span class="co">#&gt; $id</span>
-<span class="co">#&gt; [1] 2</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $occ</span>
-<span class="co">#&gt; NULL</span>
-<span class="kw">print</span>(mat<span class="op">$</span>omegaIsChol)
-<span class="co">#&gt; $id</span>
-<span class="co">#&gt; [1] FALSE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $occ</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>mat &lt;-<span class="st"> </span><span class="kw">lotri</span>({</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    a<span class="op">+</span>b <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>            <span class="fl">0.5</span>, <span class="dv">1</span>) <span class="op">|</span><span class="st"> </span>id</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    c <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>occ</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    d <span class="op">+</span>e <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>             <span class="fl">0.5</span>, <span class="dv">1</span>) <span class="op">|</span><span class="st"> </span><span class="kw">id</span>(<span class="dt">lower=</span><span class="dv">3</span>, <span class="dt">upper=</span><span class="dv">2</span>, <span class="dt">omegaIsChol=</span><span class="ot">FALSE</span>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a>})</span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">print</span>(mat)</span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; $id</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;     d   e</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; d 1.0 0.5</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; e 0.5 1.0</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; </span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; $occ</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt;   c</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; c 1</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; </span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; Properties: lower, upper, omegaIsChol</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="kw">print</span>(mat<span class="op">$</span>lower)</span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; $id</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt; d e </span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt; 3 3 </span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; </span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt; $occ</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt;    c </span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt; -Inf</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="kw">print</span>(mat<span class="op">$</span>upper)</span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt; $id</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt; d e </span></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt; 2 2 </span></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt; </span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt; $occ</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt;   c </span></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt; Inf</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="kw">print</span>(mat<span class="op">$</span>omegaIsChol)</span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt; $id</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
 <p>This gives a list of matrix(es) conditioned on the variable after the <code>|</code>. It also can add properties to each list that can be accessible after the list of matrices is returned, as shown in the above example. To do this, you simply have to enclose the properties after the conditional variable. That is <code>et1 ~ id(lower=3)</code>.</p>
+<div id="combining-symmetric-named-matrices" class="section level2">
+<h2>Combining symmetric named matrices</h2>
+<p>Now there is even a faster way to do a similar banded matrix concatenation with <code>lotriMat</code></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>testList &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">lotri</span>({et2 <span class="op">+</span><span class="st"> </span>et3 <span class="op">+</span><span class="st"> </span>et4 <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>                            <span class="fl">0.1</span>, <span class="dv">20</span>,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>                            <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="dv">30</span>)}),</span>
+<span id="cb7-4"><a href="#cb7-4"></a>                     <span class="kw">lotri</span>(et5 <span class="op">~</span><span class="st"> </span><span class="dv">6</span>),</span>
+<span id="cb7-5"><a href="#cb7-5"></a>                     <span class="kw">lotri</span>(et1<span class="op">+</span>et6 <span class="op">~</span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="dv">1</span>)),</span>
+<span id="cb7-6"><a href="#cb7-6"></a>                     <span class="kw">matrix</span>(<span class="kw">c</span>(1L, 0L, 0L, 1L), <span class="dv">2</span>, <span class="dv">2</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>                            <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;et7&quot;</span>, <span class="st">&quot;et8&quot;</span>),</span>
+<span id="cb7-8"><a href="#cb7-8"></a>                                          <span class="kw">c</span>(<span class="st">&quot;et7&quot;</span>, <span class="st">&quot;et8&quot;</span>))))</span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a>matf &lt;-<span class="st"> </span><span class="cf">function</span>(.mats){</span>
+<span id="cb7-11"><a href="#cb7-11"></a>  .omega &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(Matrix<span class="op">::</span><span class="kw">bdiag</span>(.mats))</span>
+<span id="cb7-12"><a href="#cb7-12"></a>  .d &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="kw">seq_along</span>(.mats),</span>
+<span id="cb7-13"><a href="#cb7-13"></a>                      <span class="cf">function</span>(x) {</span>
+<span id="cb7-14"><a href="#cb7-14"></a>                        <span class="kw">dimnames</span>(.mats[[x]])[<span class="dv">2</span>]</span>
+<span id="cb7-15"><a href="#cb7-15"></a>                      }))</span>
+<span id="cb7-16"><a href="#cb7-16"></a>  <span class="kw">dimnames</span>(.omega) &lt;-<span class="st"> </span><span class="kw">list</span>(.d, .d)</span>
+<span id="cb7-17"><a href="#cb7-17"></a>  <span class="kw">return</span>(.omega)</span>
+<span id="cb7-18"><a href="#cb7-18"></a>}</span>
+<span id="cb7-19"><a href="#cb7-19"></a></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="kw">print</span>(<span class="kw">matf</span>(testList))</span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt;      et2  et3  et4 et5  et1  et6 et7 et8</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt; et2 40.0  0.1  0.1   0 0.00 0.00   0   0</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt; et3  0.1 20.0  0.1   0 0.00 0.00   0   0</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; et4  0.1  0.1 30.0   0 0.00 0.00   0   0</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt; et5  0.0  0.0  0.0   6 0.00 0.00   0   0</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#&gt; et1  0.0  0.0  0.0   0 0.10 0.01   0   0</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co">#&gt; et6  0.0  0.0  0.0   0 0.01 1.00   0   0</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="co">#&gt; et7  0.0  0.0  0.0   0 0.00 0.00   1   0</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co">#&gt; et8  0.0  0.0  0.0   0 0.00 0.00   0   1</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="kw">print</span>(<span class="kw">lotriMat</span>(testList))</span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt;      et2  et3  et4 et5  et1  et6 et7 et8</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt; et2 40.0  0.1  0.1   0 0.00 0.00   0   0</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt; et3  0.1 20.0  0.1   0 0.00 0.00   0   0</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#&gt; et4  0.1  0.1 30.0   0 0.00 0.00   0   0</span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#&gt; et5  0.0  0.0  0.0   6 0.00 0.00   0   0</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt; et1  0.0  0.0  0.0   0 0.10 0.01   0   0</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt; et6  0.0  0.0  0.0   0 0.01 1.00   0   0</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#&gt; et7  0.0  0.0  0.0   0 0.00 0.00   1   0</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#&gt; et8  0.0  0.0  0.0   0 0.00 0.00   0   1</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a></span>
+<span id="cb7-42"><a href="#cb7-42"></a></span>
+<span id="cb7-43"><a href="#cb7-43"></a>mb &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(<span class="kw">matf</span>(testList),<span class="kw">lotriMat</span>(testList))</span>
+<span id="cb7-44"><a href="#cb7-44"></a></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="kw">print</span>(mb)</span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="co">#&gt; Unit: microseconds</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="co">#&gt;                expr   min    lq    mean median    uq    max neval cld</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="co">#&gt;      matf(testList) 709.9 721.0 791.270 728.45 742.4 5792.7   100   b</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a><span class="co">#&gt;  lotriMat(testList)   1.4   1.9   3.657   3.80   4.4   18.9   100  a</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="kw">autoplot</span>(mb)</span>
+<span id="cb7-51"><a href="#cb7-51"></a><span class="co">#&gt; Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
 </div>
 
 

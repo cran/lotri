@@ -1,3 +1,6 @@
+##' @useDynLib lotri, .registration = TRUE
+NULL
+
 ##' Parse lower triangular matrix list
 ##'
 ##' This is for x~c(1..) or x1+x2~c(...)
@@ -101,7 +104,7 @@
                 env[[paste0(.cnd, ".extra")]] <- .cndFull[[2]]
                 .val <- try(eval(x[[3]][[2]]), silent=TRUE)
                 if ((length(.val) == 1) &&
-                      (is.numeric(.val) || is.integer(.val))) {
+                    (is.numeric(.val) || is.integer(.val))) {
                   .env2$netas <- 1
                   .env2$eta1 <- .env2$eta1 + 1
                   .env2$names  <- c(.env2$names, as.character(x[[2]]))
@@ -132,14 +135,12 @@
     stop("bad matrix specification")
   }
 }
-##' .. content for \description{} (no empty lines) ..
+##' Parses condition
 ##'
-##' .. content for \details{} ..
 ##' @param cond Condition parsing tree
-##' @param envir
-##' @return list with 2 elements:
-##' - First element is the name of the condition
-##' - Second element is extra information
+##' @param envir Environment to parse condition in.
+##' 
+##' @return list with 2 elements: - First element is the name of the condition - Second element is extra information
 ##' @author Matthew Fidler
 ##' @noRd
 .parseCondition <- function(cond, envir=parent.frame()) {
@@ -180,7 +181,7 @@
                        .n, .n, names[1], .cur[1]))
         } else {
           .newProp[[.n]] <- setNames(rep(.cur, length(names)), names)
-          return(.newProp)
+          next;
         }
       }
       .new <- setNames(rep(.defaultProperties[.n], length(names)), names)
@@ -201,6 +202,31 @@
   }
   return(.newProp)
 }
+##' Amplifies final lotri list with defaults in .defaultProperties
+##'
+##' @param finalList Final List before return
+##' @param prop current properties
+##' @return lotri amplified with defaults for all parameters
+##' @author Matthew Fidler
+##' @noRd
+.amplifyFinal <- function(finalList, prop) {
+  for (.p in names(prop)) {
+    .cur <- prop[[.p]]
+    .dim <- dimnames(finalList[[.p]])[[1]]
+    for (.d in names(.defaultProperties)) {
+      if (any(names(.cur) == .d)) {
+        .final <- setNames(rep(.defaultProperties[.d], length(.dim)), .dim)
+        .curD <- .cur[[.d]]
+        for (.c in names(.curD)) {
+          .final[.c] <- .curD[.c]
+        }
+        .cur[[.d]] <- .final
+      }
+    }
+    prop[[.p]] <- .cur
+  }
+  return(prop)
+}
 ##' Merge properties between two matrices
 ##'
 ##' @param prop Initial property list or character vector of names to
@@ -217,7 +243,7 @@
     .ret[[id]] <- new
     return(.ret)
   }
-  if (!inherits(prop, "list")){
+  if (!inherits(prop, "list")) {
     for (.n in names(new)) {
       if (any(.n == names(.defaultProperties))) {
         new[[.n]] <- c(new[[.n]],
@@ -245,6 +271,17 @@
   .ret <- prop
   .ret[[id]] <- .old
   return(.ret)
+}
+
+##' Extract a matrix saved in the environment
+##'
+##' @param env Environment where matrix is saved
+##' @param val value where the matrix is saved in
+##' @return named matrix
+##' @author Matthew Fidler
+##' @noRd
+.getMatrix <- function(env, val) {
+  return(.Call(`_lotriLstToMat`, env[[val]], NULL, 1L, PACKAGE='lotri'))
 }
 
 ##' Easily Specify block-diagonal matrices with lower triangular info
@@ -308,6 +345,45 @@
 ##' ## Overall this is a flexible way to specify symmetric block
 ##' ## diagonal matrices.
 ##'
+##' ## For RxODE, you may also condition based on different levels of
+##' ## nesting with lotri;  Here is an example:
+##'
+##' mat <- lotri(lotri(iov.Ka ~ 0.5,
+##'                     iov.Cl ~ 0.6),
+##'               lotri(occ.Ka ~ 0.5,
+##'                     occ.Cl ~ 0.6) | occ(lower=4,nu=3))
+##'
+##' mat
+##'
+##' ## you may access features of the matrix simply by `$` that is
+##'
+##' mat$lower # Shows the lower bound for each condition
+##'
+##' mat$lower$occ # shows the lower bound for the occasion variable
+##'
+##' ## Note that `lower` fills in defaults for parameters.  This is true
+##' ## for `upper` true;  In fact when accessing this the defaults
+##' ## are put into the list
+##'
+##' mat$upper
+##'
+##' ## However all other values return NULL if they are not present like
+##'
+##' mat$lotri
+##'
+##' ## And values that are specified once are only returned on one list:
+##'
+##' mat$nu
+##'
+##' mat$nu$occ
+##' mat$nu$id
+##'
+##' ## You can also change the default condition with `as.lotri`
+##'
+##' mat <- as.lotri(mat,default="id")
+##'
+##' mat
+##'
 ##' @author Matthew L Fidler
 ##' @importFrom methods is
 ##' @importFrom stats setNames
@@ -321,6 +397,7 @@ lotri  <- function(x, ..., envir=parent.frame()) {
     .call <- .call[-.w]
   }
   .fullCnd <- NULL
+  .fullCndLst <- list()
   if (length(.call[[1]]) > 1) {
     if (identical(.call[[1]][[1]], quote(`|`))) {
       .cnd <- .call[[1]][[3]]
@@ -332,15 +409,56 @@ lotri  <- function(x, ..., envir=parent.frame()) {
   if (is.null(x)) {
     .ret  <- NULL
   } else if (is.list(x)) {
-    omega  <- lapply(x, lotri)
-    if (is(omega, "list")) {
-      .omega <- as.matrix(Matrix::bdiag(omega))
-      .d <- unlist(lapply(seq_along(omega),
-                          function(x) {
-                            dimnames(omega[[x]])[2]
-                          }))
-      dimnames(.omega) <- list(.d, .d)
-      omega <- .omega
+    omega  <- lapply(x, lotri, envir=envir)
+    if (inherits(omega, "list")) {
+      .env <- new.env(parent=emptyenv())
+      .env[["...cnd"]] <- c()
+      .env[["...empty"]] <- list()
+      lapply(seq_along(omega), function(x){
+        .cur <- omega[[x]]
+        .curName <- names(omega)[x]
+        if (is.null(.curName)) {
+          .curName <- ""
+        }
+        if (inherits(.cur, "matrix")) {
+          if (.curName == "") {
+            assign("...empty", c(.env[["...empty"]], list(.cur)), .env)
+          } else {
+            assign(.curName, c(.env[[.curName]], list(.cur)), .env)
+            assign("...cnd", unique(c(.env[["...cnd"]], .curName)), .env)
+          }
+        } else if (inherits(.cur, "list") || inherits(.cur, "lotri")) {
+          lapply(seq_along(.cur),
+                 function(y) {
+                   .cury <- .cur[[y]]
+                   .curName <- names(.cur)[y]
+                   if (.curName == "") {
+                     assign("...empty", c(.env[["...empty"]],
+                                          list(.cury)), .env)
+                   } else {
+                     assign(.curName, list(.cury), .env)
+                     assign("...cnd", unique(c(.env[["...cnd"]],
+                                               .curName)), .env)
+                   }
+                 })
+        }
+      })
+      if (length(.env$...empty) > 0){
+        .omega <- .getMatrix(.env, "...empty")
+      } else {
+        .omega <- NULL
+      }
+      if (length(.env$...cnd) > 0) {
+        .lst <- setNames(lapply(.env$...cnd, function(cnd) {
+          .getMatrix(.env, cnd)
+        }), .env$...cnd)
+        if (!is.null(.omega)) {
+          .lst <- c(list(.omega), .lst)
+        }
+        omega <- .lst
+      } else {
+        omega <- .omega
+      }
     }
     .ret  <- omega
   } else if (is.matrix(x)) {
@@ -408,6 +526,7 @@ lotri  <- function(x, ..., envir=parent.frame()) {
         .lstC <- c(.lstC, list(.other))
       }
       if (!is.null(.prop)) {
+        .prop <- .amplifyFinal(.lstC, .prop)
         attr(.lstC, "lotri") <- .prop
         class(.lstC) <- "lotri"
       }
@@ -417,26 +536,58 @@ lotri  <- function(x, ..., envir=parent.frame()) {
   if (!is.null(.fullCnd)) {
     .lst <- list()
     .lst[[.fullCnd]] <- .ret
-    if (length(.call) == 1L) return(.lst)
+    .prop <- NULL
+    if (!is.null(.fullCndLst[[2]])) {
+      .prop <- list()
+      .prop[[.fullCnd]] <- .amplifyDefault(.fullCndLst[[2]],
+                                           dimnames(.ret)[[1]])
+    }
+    if (!is.null(.prop)) {
+      attr(.lst, "lotri") <- .amplifyFinal(.lst, .prop)
+      class(.lst) <- "lotri"
+    }
+    if (length(.call) == 1L) {
+      return(.lst)
+    }
     .call <- .call[-1]
     .tmp <- do.call("lotri", .call, envir=envir)
     if (any(names(.tmp) == .fullCnd)) {
+      if (!is.null(.prop)) {
+        .tmpL <- attr(.tmp, "lotri")
+        .tmp0 <- .tmpL[[.fullCnd]]
+        .tmp1 <- .tmpL[names(.tmpL) != .fullCnd]
+        .prop <- .mergeProp(.prop, .fullCnd,
+                            .amplifyDefault(.tmp0,
+                                            dimnames(.tmp[[.fullCnd]])[[1]]))
+        .prop <- c(.prop, .tmp1)
+      }
       .ret <- lotri(list(.ret, .tmp[[.fullCnd]]), envir=envir)
       .w <- which(names(.tmp) != .fullCnd)
       if (length(.w) > 0L) {
         .tmp <- .tmp[.w]
         .tmp2 <- list()
         .tmp2[[.fullCnd]] <- .ret
-        return(c(.tmp2, .tmp))
+        .ret <- c(.tmp2, .tmp)
+        return(.ret)
       } else {
         .tmp <- list()
         .tmp[[.fullCnd]] <- .ret
+        if (!is.null(.prop)) {
+          attr(.tmp, "lotri") <- .amplifyFinal(.tmp, .prop)
+          class(.tmp) <- "lotri"
+        }
         return(.tmp)
       }
     } else {
       .lst <- list()
       .lst[[.fullCnd]] <- .ret
-      return(c(.lst, .tmp))
+      .tmpCnd <- c(.prop, attr(.tmp, "lotri"))
+      .ret <- c(.lst, .tmp)
+      if (!is.null(.tmpCnd)) {
+        attr(.ret, "lotri") <- .amplifyFinal(.ret, .tmpCnd)
+        class(.ret) <- "lotri"
+      }
+      return(.ret)
     }
   } else {
     if (length(.call) == 1L) return(.ret)
@@ -453,7 +604,12 @@ lotri  <- function(x, ..., envir=parent.frame()) {
         return(.ret)
       }
     } else {
-      return(lotri(c(list(.ret), list(.tmp)), envir=envir))
+      .ret <- lotri(c(list(.ret), list(.tmp)), envir=envir)
+      if (inherits(.tmp, "lotri")) {
+        attr(.ret, "lotri") <- .amplifyFinal(.ret, attr(.tmp, "lotri"))
+        class(.ret) <- "lotri"
+      }
+      return(.ret)
     }
   }
 }
@@ -466,27 +622,31 @@ print.lotri <- function(x, ...){
   attr(.tmp, "lotri") <- NULL
   print(.tmp)
   .names <- x$.names
-  if (length(.names) > 0){
+  if (length(.names) > 0) {
     cat(paste0("Properties: ", paste(.names, collapse=", ")), "\n")
   }
   return(invisible(x))
 }
 
 ##' @export
-str.lotri <- function(object, ...){
+str.lotri <- function(object, ...) {
   str(object$.list)
 }
 
 ##'@importFrom utils .DollarNames
 ##'@export
 .DollarNames.lotri <- function(x, pattern) {
-  grep(pattern, unique(c(names(x), ".names", ".list", x$.names)),
+  grep(pattern, unique(c(names(x), ".allNames", ".bounds",
+                         ".names", ".list", ".maxNu", x$.names)),
        value=TRUE)
 }
 
 ##'@export
 `$.lotri` <-  function(obj, arg, exact = FALSE) {
   .lotri <- attr(obj, "lotri")
+  if (arg == ".maxNu") {
+    return(.Call(`_lotriMaxNu`, obj, PACKAGE="lotri"));
+  }
   if (any(names(obj) == arg)) {
     .tmp <- obj
     class(.tmp) <- NULL
@@ -497,6 +657,12 @@ str.lotri <- function(object, ...){
                                 function(x) {
                                   names(.lotri[[x]])
                                 }))))
+  }
+  if (arg == ".allNames") {
+    return(.Call(`_lotriAllNames`, obj ,PACKAGE="lotri"))
+  }
+  if (arg == ".bounds") {
+    return(.Call(`_lotriGetBounds`, obj, NULL, 1L, PACKAGE="lotri"))
   }
   if (arg == ".list") {
     .tmp <- obj
@@ -509,18 +675,185 @@ str.lotri <- function(object, ...){
     }
     return(.tmp)
   }
+  
   .env <- new.env(parent=emptyenv())
   .env$empty <- TRUE
   .ret <- setNames(lapply(names(obj), function(x) {
     if (any(names(.lotri) == x)) {
-      .ret <-.lotri[[x]][[arg]]
+      .ret <- .lotri[[x]][[arg]]
       if (is.null(.ret)) return(NULL)
       assign("empty", FALSE, .env)
       return(.ret)
     } else {
+      .def <- .defaultProperties[arg]
+      if (!is.na(.def)) {
+        .w <- which(names(obj) == x)
+        if (length(.w) == 1){
+          .dim <- dimnames(obj[[.w]])[[1]]
+          .ret <- setNames(rep(.def, length(.dim)), .dim)
+          return(.ret)
+        }
+      }
       return(NULL)
     }
   }), names(obj))
-  if (.env$empty) return(NULL)
+  .w <- which(unlist(lapply(.ret, is.null)))
+  if (length(.w) > 0) {
+    .ret <- .ret[-.w]
+  }
+  if (.env$empty) {
+    .def <- .defaultProperties[arg]
+    if (!is.na(.def)) {
+      .ret <- setNames(lapply(names(obj), function(x) {
+        .dim <- dimnames(obj[[x]])[[1]]
+        setNames(rep(.def, length(.dim)), .dim)
+      }), names(obj))
+      return(.ret)
+    }
+    return(NULL)
+  }
   return(.ret)
+}
+
+##' As lower triangular matrix
+##'
+##' @param x Matrix or other data frame
+##'
+##' @param ... Other factors
+##'
+##' @param default Is the default factor when no conditioning is
+##'     implemented.
+##'
+##' @return Lower triangular matrix
+##'
+##' @author Matthew Fidler
+##'
+##' @export
+as.lotri <- function(x, ..., default="") {
+  UseMethod("as.lotri")
+}
+
+##' @rdname as.lotri
+##' @export
+as.lotri.matrix <- function(x, ..., default="") {
+  .Call(`_asLotriMat`, x, list(...), default=default);
+}
+
+##' @rdname as.lotri
+##' @export
+as.lotri.default <- function(x, ..., default="") {
+  .ret <- x
+  class(.ret) <- NULL
+  .n <- names(.ret)
+  .w <- which(names(.ret) == "")
+  if (length(.w) == 1) {
+    .n[.w] <- default
+    names(.ret) <- .n
+  }
+  class(.ret) <- "lotri"
+  return(.ret)
+}
+
+##'@export
+as.matrix.lotri <- function(x, ...){
+  .ret <- x
+  class(.ret) <- NULL
+  if (length(.ret) == 1){
+    return(.ret[[1]])
+  } else {
+    stop("cannot convert multiple level lotri matrix to simple matrix")
+  }
+}
+##' Create a matrix from a list of matrices
+##'
+##' This creates a named banded symmetric matrix from a list of named
+##' symmetric matrices.
+##' 
+##' @param matList list of symmetric named matrices
+##'
+##' @param format The format of dimension names when a sub-matrix is
+##'   repeated. The format will be called with the dimension number,
+##'   so "ETA[\%d]" would represent "ETA[1]", "ETA[2]", etc
+##'
+##' @param start The number the counter of each repeated dimension
+##'   should start.
+##'
+##' @return Named symmetric block diagonal matrix based on
+##'   concatenating the list of matrices together
+##' 
+##' @examples
+##'
+##' testList <- list(lotri({et2 + et3 + et4 ~ c(40,
+##'                            0.1, 20,
+##'                            0.1, 0.1, 30)}),
+##'                  lotri(et5 ~ 6))
+##'
+##' testList
+##'
+##' lotriMat(testList)
+##'
+##'
+##' # Another option is to repeat a matrix a number of times.  This
+##' # can be done with list(matrix, # times to repeat).
+##'
+##' # In the example below, the first matrix is repeated 3 times
+##' testList <- list(list(lotri({et2 + et3 + et4 ~ c(40,
+##'                            0.1, 20,
+##'                            0.1, 0.1, 30)}), 3),
+##'                  lotri(et5 ~ 6))
+##'
+##' lotriMat(testList)
+##'
+##' # Notice that the dimension names `et2`, `et3` and `et4` are
+##' # repeated.
+##'
+##' # Another option is to name the dimensions.  For example it could
+##' # be `ETA[1]`, `ETA[2]`, etc by using the 'format' option:
+##'
+##' lotriMat(testList, "ETA[%d]")
+##'
+##' # Or could start with ETA[2]:
+##' 
+##' lotriMat(testList, "ETA[%d]", 2)
+##' 
+##' @author Matthew Fidler
+##' @export
+lotriMat <- function(matList, format=NULL, start=1L) {
+  .Call(`_lotriLstToMat`, matList, format, start, PACKAGE='lotri')
+}
+
+##' Separate a lotri matrix into above and below lotri matrices
+##'
+##' This is used for creating nesting simulations in `RxODE` and may
+##' not be useful for external function calls.
+##' 
+##' @param x lotri matrix
+##' @param above Named integer vector listing variability above the id
+##'   level.  Each element lists the number of population differences
+##'   in the whole data-set (as integer)
+##' @param below Named integer vector listing variability below the id
+##'   level.  Each element lists the number of items below the
+##'   individual level.  For example with 3 occasions per indivdiual
+##'   you could use 'c(occ=3L)'
+##' @param aboveStart Add the attribute of where THETA[#] will be added
+##' @param belowStart Add the attribute of where ETA[#] will be added
+##' @return List of two lotri matrices
+##' @author Matthew Fidler
+##' @export
+##' @examples
+##' omega <- lotri(lotri(eta.Cl ~ 0.1,
+##'                         eta.Ka ~ 0.1) | id(nu=100),
+##'                   lotri(eye.Cl ~ 0.05,
+##'                         eye.Ka ~ 0.05) | eye(nu=50),
+##'                   lotri(iov.Cl ~ 0.01,
+##'                         iov.Ka ~ 0.01) | occ(nu=200),
+##'                   lotri(inv.Cl ~ 0.02,
+##'                         inv.Ka ~ 0.02) | inv(nu=10))
+##'
+##' lotriSep(omega, above=c(inv=10L), below=c(eye=2L, occ=4L))
+lotriSep <- function(x, above, below,
+                     aboveStart=1L, belowStart=1L){
+  .Call(`_lotriSep`, x, above, below,
+        aboveStart=as.integer(aboveStart), belowStart=as.integer(belowStart),
+        PACKAGE="lotri")
 }

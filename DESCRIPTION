@@ -1,6 +1,6 @@
 Package: lotri
 Title: A Simple Way to Specify Symmetric, Block Diagonal Matrices
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: c(person("Matthew L.","Fidler",
              role = c("aut", "cre"), email = "matthew.fidler@gmail.com",
              comment=c(ORCID="0000-0001-8538-6691")))
@@ -13,14 +13,16 @@ Depends: R (>= 3.4.0)
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-Imports: Matrix, methods, utils, stats
-Suggests: testthat, covr, knitr, rmarkdown
-RoxygenNote: 7.0.2
+Imports: methods, utils, stats
+Suggests: testthat, covr, knitr, rmarkdown, Matrix, microbenchmark,
+        ggplot2
+NeedsCompilation: yes
+Biarch: true
+RoxygenNote: 7.1.0
 VignetteBuilder: knitr
 BugReports: https://github.com/nlmixrdevelopment/lotri/issues
 URL: https://github.com/nlmixrdevelopment/lotri
-NeedsCompilation: no
-Packaged: 2020-02-11 22:35:25 UTC; matt
+Packaged: 2020-05-29 20:30:35 UTC; FIDLEMA3
 Author: Matthew L. Fidler [aut, cre] (<https://orcid.org/0000-0001-8538-6691>)
 Repository: CRAN
-Date/Publication: 2020-02-12 12:10:10 UTC
+Date/Publication: 2020-05-29 21:20:03 UTC

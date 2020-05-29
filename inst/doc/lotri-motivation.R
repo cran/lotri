@@ -9,6 +9,8 @@ mat <- matrix(c(1, 0.5, 0.5, 1),nrow=2,ncol=2,dimnames=list(c("a", "b"), c("a", 
 
 ## -----------------------------------------------------------------------------
 library(lotri)
+library(microbenchmark)
+library(ggplot2)
 
 mat <- lotri(a+b ~ c(1,
                      0.5, 1))
@@ -54,4 +56,34 @@ print(mat)
 print(mat$lower)
 print(mat$upper)
 print(mat$omegaIsChol)
+
+## -----------------------------------------------------------------------------
+testList <- list(lotri({et2 + et3 + et4 ~ c(40,
+                            0.1, 20,
+                            0.1, 0.1, 30)}),
+                     lotri(et5 ~ 6),
+                     lotri(et1+et6 ~c(0.1, 0.01, 1)),
+                     matrix(c(1L, 0L, 0L, 1L), 2, 2,
+                            dimnames=list(c("et7", "et8"),
+                                          c("et7", "et8"))))
+
+matf <- function(.mats){
+  .omega <- as.matrix(Matrix::bdiag(.mats))
+  .d <- unlist(lapply(seq_along(.mats),
+                      function(x) {
+                        dimnames(.mats[[x]])[2]
+                      }))
+  dimnames(.omega) <- list(.d, .d)
+  return(.omega)
+}
+
+print(matf(testList))
+
+print(lotriMat(testList))
+
+
+mb <- microbenchmark(matf(testList),lotriMat(testList))
+
+print(mb)
+autoplot(mb)
 

@@ -70,6 +70,45 @@ lotri(list(et2 + et3 + et4 ~ c(40,
 ## Overall this is a flexible way to specify symmetric block
 ## diagonal matrices.
 
+## For RxODE, you may also condition based on different levels of
+## nesting with lotri;  Here is an example:
+
+mat <- lotri(lotri(iov.Ka ~ 0.5,
+                    iov.Cl ~ 0.6),
+              lotri(occ.Ka ~ 0.5,
+                    occ.Cl ~ 0.6) | occ(lower=4,nu=3))
+
+mat
+
+## you may access features of the matrix simply by `$` that is
+
+mat$lower # Shows the lower bound for each condition
+
+mat$lower$occ # shows the lower bound for the occasion variable
+
+## Note that `lower` fills in defaults for parameters.  This is true
+## for `upper` true;  In fact when accessing this the defaults
+## are put into the list
+
+mat$upper
+
+## However all other values return NULL if they are not present like
+
+mat$lotri
+
+## And values that are specified once are only returned on one list:
+
+mat$nu
+
+mat$nu$occ
+mat$nu$id
+
+## You can also change the default condition with `as.lotri`
+
+mat <- as.lotri(mat,default="id")
+
+mat
+
 }
 \author{
 Matthew L Fidler

@@ -1,16 +1,26 @@
+<!--
+---
+output:
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 3
+---
+-->
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/nlmixrdevelopment/lotri/workflows/R-CMD-check/badge.svg)](https://github.com/nlmixrdevelopment/lotri/actions)
-[![Coverage status](https://codecov.io/gh/nlmixrdevelopment/lotri/branch/master/graph/badge.svg)](https://codecov.io/github/nlmixrdevelopment/lotri?branch=master) 
+[![R-CMD-check](https://github.com/nlmixr2/lotri/workflows/R-CMD-check/badge.svg)](https://github.com/nlmixr2/lotri/actions)
+[![Coverage status](https://codecov.io/gh/nlmixr2/lotri/branch/master/graph/badge.svg)](https://codecov.io/github/nlmixr2/lotri?branch=master) 
 [![CRAN status](https://www.r-pkg.org/badges/version/lotri)](https://cran.r-project.org/package=lotri)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/lotri)](https://cran.r-project.org/package=lotri)
-[![CodeFactor](https://www.codefactor.io/repository/github/nlmixrdevelopment/lotri/badge/master)](https://www.codefactor.io/repository/github/nlmixrdevelopment/lotri/overview/master)
+[![CodeFactor](https://www.codefactor.io/repository/github/nlmixr2/lotri/badge)](https://www.codefactor.io/repository/github/nlmixr2/lotri)
 <!-- badges: end -->
 
-# lotri
+# lotri <img src='man/figures/logo.png' align="right" height="139" />
 
 The goal of lotri is to easily specify block-diagonal matrices with
 (lo)wer (tri)angular matrices.  Its as if you have won the (badly
@@ -18,7 +28,7 @@ spelled) lotri (or lottery).
 
 This was made to allow people (like me) to specify lower triangular
 matrices similar to the domain specific language implemented in
-`nlmixr`.  Originally I had it included in `RxODE`, but thought it may
+`nlmixr2`.  Originally I had it included in `RxODE`, but thought it may
 have more general applicability, so I separated it into a new
 package. 
 
@@ -35,7 +45,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("nlmixrdevelopment/lotri")
+devtools::install_github("nlmixr2/lotri")
 ```
 ## Example
 
@@ -244,9 +254,9 @@ mb <- microbenchmark(matf(testList),lotriMat(testList))
 
 print(mb)
 #> Unit: microseconds
-#>                expr     min      lq      mean  median       uq      max neval
-#>      matf(testList) 463.599 491.021 598.57232 521.231 585.1135 5710.686   100
-#>  lotriMat(testList)   1.297   1.646   2.56874   2.732   3.0105    7.734   100
+#>                expr     min      lq      mean  median      uq      max neval
+#>      matf(testList) 452.985 456.413 526.98507 465.214 502.185 4499.546   100
+#>  lotriMat(testList)   2.517   2.954   4.27569   4.445   4.986   19.496   100
 
 autoplot(mb)
 #> Coordinate system already present. Adding new coordinate system, which will replace the existing one.
@@ -296,10 +306,10 @@ print(lotriMat(testList))
 mb <- microbenchmark(matf(testList),lotriMat(testList))
 
 print(mb)
-#> Unit: nanoseconds
-#>                expr    min       lq      mean   median       uq     max neval
-#>      matf(testList) 448951 454581.5 535816.43 463802.5 528361.0 2228159   100
-#>  lotriMat(testList)    989   1281.5   2690.28   2396.0   2731.5   26770   100
+#> Unit: microseconds
+#>                expr     min       lq      mean   median       uq      max neval
+#>      matf(testList) 438.772 445.3890 482.13594 448.0000 457.9930 1903.768   100
+#>  lotriMat(testList)   2.359   2.6305   3.87626   3.0155   4.6315   20.582   100
 
 autoplot(mb)
 #> Coordinate system already present. Adding new coordinate system, which will replace the existing one.
@@ -311,5 +321,5 @@ autoplot(mb)
 
 A new feature is the ability to condition on variables by `|`.  This
 will be useful when simulating nested random effects using the
-upcoming `RxODE`
+upcoming `RxODE2`
 

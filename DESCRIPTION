@@ -1,6 +1,6 @@
 Package: lotri
 Title: A Simple Way to Specify Symmetric, Block Diagonal Matrices
-Version: 0.4.2
+Version: 0.4.3
 Authors@R: 
     person("Matthew L.", "Fidler", , "matthew.fidler@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8538-6691"))
@@ -23,7 +23,7 @@ Encoding: UTF-8
 NeedsCompilation: yes
 RoxygenNote: 7.2.0
 Language: en-US
-Packaged: 2022-06-18 16:15:39 UTC; matt
+Packaged: 2023-03-20 17:40:30 UTC; matt
 Author: Matthew L. Fidler [aut, cre] (<https://orcid.org/0000-0001-8538-6691>)
 Repository: CRAN
-Date/Publication: 2022-06-18 16:50:02 UTC
+Date/Publication: 2023-03-20 18:20:12 UTC

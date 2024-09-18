@@ -127,23 +127,31 @@ NULL
   .ret
 }
 
+.isFixedElt <- function(x) {
+  (identical(x, quote(`fix`)) ||
+     identical(x, quote(`fixed`)) ||
+     identical(x, quote(`Fixed`)) ||
+     identical(x, quote(`FIXED`)) ||
+     identical(x, quote(`Fix`)) ||
+     identical(x, quote(`FIX`)))
+}
+
+.isUnfixedElt <- function(x) {
+ (identical(x, quote(`unfix`)) ||
+    identical(x, quote(`unfixed`)) ||
+    identical(x, quote(`Unfixed`)) ||
+    identical(x, quote(`UNFIXED`)) ||
+    identical(x, quote(`Unfix`)) ||
+    identical(x, quote(`UNFIX`)))
+}
+
 .repFixedWithC <- function(x, env=new.env(parent=emptyenv())) {
   if (is.call(x)) {
-    if (identical(x[[1]], quote(`fix`)) ||
-          identical(x[[1]], quote(`fixed`)) ||
-          identical(x[[1]], quote(`Fixed`)) ||
-          identical(x[[1]], quote(`FIXED`)) ||
-          identical(x[[1]], quote(`Fix`)) ||
-          identical(x[[1]], quote(`FIX`))) {
+    if (.isFixedElt(x[[1]])) {
       env$fix <- TRUE
       x[[1]] <- quote(`c`)
       return(x)
-    } else if (identical(x[[1]], quote(`unfix`)) ||
-                 identical(x[[1]], quote(`unfixed`)) ||
-                 identical(x[[1]], quote(`Unfixed`)) ||
-                 identical(x[[1]], quote(`UNFIXED`)) ||
-                 identical(x[[1]], quote(`Unfix`)) ||
-                 identical(x[[1]], quote(`UNFIX`))) {
+    } else if (.isUnfixedElt(x[[1]])) {
       env$unfix <- TRUE
       x[[1]] <- quote(`c`)
       return(x)
@@ -164,7 +172,7 @@ NULL
 }
 #' Assert the proper properties of a lotri matrix (cant mix var, sd ) etc
 #'
-#' 
+#'
 #' @param x expression
 #' @param env environment
 #' @return Nothing called for side effects
@@ -206,32 +214,32 @@ NULL
   }
 }
 #' Calculate fixed properties
-#' 
-#' @param x expression 
+#'
+#' @param x expression
 #' @param env environment
 #' @return nothing called for side effects
 #' @author Matthew L. Fidler
 #' @noRd
 .lotriParseMatCalculateFixedProps <- function(x, env=NULL) {
-  if (identical(x[[1]], quote(`fix`)) ||
-        identical(x[[1]], quote(`fixed`)) ||
-        identical(x[[1]], quote(`FIX`)) ||
-        identical(x[[1]], quote(`FIX`))) {
+  if (.isFixedElt(x[[1]])) {
     env$globalFix <- TRUE
   }
-  if (identical(x[[1]], quote(`unfix`)) ||
-        identical(x[[1]], quote(`unfixed`)) ||
-        identical(x[[1]], quote(`UNFIX`)) ||
-        identical(x[[1]], quote(`UNFIX`))) {
+  if (.isUnfixedElt(x[[1]])) {
     env$globalUnfix <- TRUE
   }
 }
 
-.lotriParseMat <- function(x, env=NULL) {
+.lotriParseMat <- function(x, env=NULL, noMat=FALSE) {
   .lotriParseMatAssertGoodProps(x, env)
   .lotriParseMatCalculateFixedProps(x, env)
-  if (length(x) == 2) {
-    return(.lotriParseMat(x[[2]], env=env))
+  if (identical(x[[1]], quote(`+`)) ||
+        identical(x[[1]], quote(`-`)) ||
+        identical(x[[1]], quote(`*`)) ||
+        identical(x[[1]], quote(`/`)) ||
+        identical(x[[1]], quote(`^`))) {
+    .r <- list(eval(x, envir=.lotriParentEnv))
+  } else if (length(x) == 2) {
+    return(.lotriParseMat(x[[2]], env=env, noMat=noMat))
   } else if (length(x) == 1) {
     .r <- x
   } else {
@@ -246,7 +254,14 @@ NULL
   env$val <- unlist(.tmp[1, ])
   env$fix <- unlist(.tmp[2, ])
   env$unfix <- unlist(.tmp[3, ])
-  env$nv <- .lotriMatrixVec(.lotriMatrix(env$val, chol=env$chol, sd=env$sd, cor=env$cor, lhs=env$lhs))
+  if (noMat) {
+    env$nv <- env$val
+  } else if (length(env$lhs) == 1 &&
+        length(env$val) != 1) {
+    env$nv <- env$val
+  } else {
+    env$nv <- .lotriMatrixVec(.lotriMatrix(env$val, chol=env$chol, sd=env$sd, cor=env$cor, lhs=env$lhs))
+  }
   if (!exists("globalFix", env)) {
     env$globalFix <- FALSE
   }
@@ -260,6 +275,135 @@ NULL
     ifelse(is.na(x), env$globalUnfix, x)
   }, logical(1))
   return(list(env$nv, .fix, .unfix))
+}
+
+#' Handle Matrix Row for Lotri
+#'
+#' This internal function processes a matrix row for the Lotri package.
+#'
+#' @param k Integer. The starting index for the row.
+#' @param j Integer. The row number to process.
+#' @param value Numeric vector. The values to be inserted into the matrix.
+#' @param fix Logical vector. Indicates which values are fixed.
+#' @param unfix Logical vector. Indicates which values are not fixed.
+#' @param env Environment. The environment containing the data frame `df` and the offset `eta1`.
+#'
+#' @return Integer. The next index to process.
+#' @keywords internal
+#' @noRd
+.lotri1handleMatrixRow <- function(k, j, value, fix, unfix, env) {
+  .i <- 0
+  .k <- k
+  while (TRUE) {
+    .v <- value[.k]
+    .f <- fix[.k]
+    .u <- unfix[.k]
+    names(.v) <- names(.f) <- names(.u) <- NULL
+    .i <- .i + 1
+    .k <- .k + 1
+    if (.i == j) {
+      env$df <- rbind(
+        env$df,
+        data.frame(i = env$eta1 + .i, j = env$eta1 + .i, x = .v, fix=.f, unfix=.u)
+      )
+      return(.k)
+    } else {
+      env$df <- rbind(
+        env$df,
+        data.frame(
+          i = c(env$eta1 + .i, env$eta1 + j),
+          j = c(env$eta1 + j, env$eta1 + .i), x = .v,
+          fix=.f, unfix=.u
+        )
+      )
+    }
+  }
+  return(NA_integer_)
+}
+
+.handleLastExpressionIsCndForForm2 <- function(x2, x3, env) {
+  if (exists("lastCnd", env)) {
+    .cnd <- env$lastCnd
+    if (exists(.cnd, env)) {
+      .env2 <- env[[.cnd]]
+      .env2$lastN <- max(.env2$df$i)
+      .len <- length(.env2$df$i)
+      .lotri1(x2, x3, .env2)
+      if (.len < length(.env2$df$i)) {
+        return(TRUE)
+      }
+    }
+  }
+  FALSE
+}
+
+
+.resetLastN <- function(env, i=1L) {
+  if (env$lastN > 1L) {
+    env$eta1 <- env$eta1 + env$lastN - 1L
+  }
+  env$lastN <- i
+}
+
+#' Handle Single Line Estimation in Form #2
+#'
+#' This function processes a single line estimation in a form,
+#' updating the environment's data frame with the provided values,
+#' fixed, and unfixed parameters.
+#'
+#' This is for lotri matrices of the form x ~ 1; x2 ~ c(0.1, 1); x3 ~
+#' c(0.1, 0.2, 1)
+#'
+#' @param x2 A single element to be processed.
+#' @param values A vector of values to be added to the data frame.
+#' @param fixed A vector of fixed parameters corresponding to the
+#'   values.
+#' @param unfixed A vector of unfixed parameters corresponding to the
+#'   values.
+#' @param env An environment containing the data frame (`df`), the
+#'   last number of elements (`lastN`), and other necessary variables.
+#'
+#' @return Returns `TRUE` if the processing is successful and the data
+#'   frame is updated, otherwise returns `FALSE`.
+#' @noRd
+.handleSingleLineEstInLineForm <- function(x2, values, fixed, unfixed, env) {
+  .r <- values
+  .rf <- fixed
+  .ru <- unfixed
+  if (env$lastN != 0 && length(x2) == 1L) {
+    if (length(.r) == env$lastN + 1) {
+      for (.i in seq_len(env$lastN)) {
+        .v <- .r[.i]
+        .f <- .rf[.i]
+        .u <- .ru[.i]
+        names(.v) <- names(.f) <- names(.u) <- NULL
+        env$df <- rbind(
+          env$df,
+          data.frame(
+            i = c(env$eta1 + .i-1, env$eta1 + env$lastN),
+            j = c(env$eta1 + env$lastN, env$eta1 + .i-1), x = .v,
+            fix=.f, unfix=.u
+          )
+        )
+      }
+      .v <- .r[env$lastN+1]
+      .f <- .rf[env$lastN+1]
+      .u <- .ru[env$lastN+1]
+      names(.v) <- names(.f) <- names(.u) <- NULL
+      env$df <- rbind(
+        env$df,
+        data.frame(
+          i = env$eta1 + env$lastN,
+          j = env$eta1 + env$lastN, x = .v,
+          fix=.f, unfix=.u
+        )
+      )
+      env$lastN <- env$lastN + 1
+      env$names <- c(env$names, deparse1(x2))
+      return(TRUE)
+    }
+  }
+  FALSE
 }
 
 #' Parse lower triangular matrix list
@@ -283,55 +427,102 @@ NULL
   .r <- .rl[[1]]
   .rf <- .rl[[2]]
   .ru <- .rl[[3]]
+  if (.handleSingleLineEstInLineForm(x2, values=.r, fixed=.rf, unfixed=.ru, env)) {
+    return(NULL)
+  }
+  if (env$lastN != 0 && length(x2) == 1L && length(.r) == env$lastN + 1) {
+    for (.i in seq_len(env$lastN)) {
+      .v <- .r[.i]
+      .f <- .rf[.i]
+      .u <- .ru[.i]
+      names(.v) <- names(.f) <- names(.u) <- NULL
+      env$df <- rbind(
+        env$df,
+        data.frame(
+          i = c(env$eta1 + .i-1, env$eta1 + env$lastN),
+          j = c(env$eta1 + env$lastN, env$eta1 + .i-1), x = .v,
+          fix=.f, unfix=.u
+        )
+      )
+    }
+    .v <- .r[env$lastN+1]
+    .f <- .rf[env$lastN+1]
+    .u <- .ru[env$lastN+1]
+    names(.v) <- names(.f) <- names(.u) <- NULL
+    env$df <- rbind(
+      env$df,
+      data.frame(
+        i = env$eta1 + env$lastN,
+        j = env$eta1 + env$lastN, x = .v,
+        fix=.f, unfix=.u
+      )
+    )
+    env$lastN <- env$lastN + 1
+    env$names <- c(env$names, deparse1(x2))
+    return(invisible())
+  }
   env$netas <- length(.r)
   .num <- sqrt(1 + env$netas * 8) / 2 - 1 / 2
   if (round(.num) == .num) {
+    if (.num == 1) {
+      env$lastN <- 1
+    }
     .n <- unlist(strsplit(as.character(x2), " +[+] +"))
     .n <- .n[.n != "+"]
     if (length(.n) == .num) {
       env$names <- c(env$names, .n)
-      .i <- 0
       .j <- 1
-      for (.k in seq_along(.r)) {
-        .v <- .r[.k]
-        .f <- .rf[.k]
-        .u <- .ru[.k]
-        .i <- .i + 1
-        if (.i == .j) {
-          env$df <- rbind(
-            env$df,
-            data.frame(i = env$eta1 + .i, j = env$eta1 + .i, x = .v, fix=.f, unfix=.u)
-          )
-          .j <- .j + 1
-          .i <- 0
-        } else {
-          env$df <- rbind(
-            env$df,
-            data.frame(
-              i = c(env$eta1 + .i, env$eta1 + .j),
-              j = c(env$eta1 + .j, env$eta1 + .i), x = .v,
-              fix=.f, unfix=.u
-            )
-          )
+      .k <- 1
+      while (TRUE) {
+        .k <- .lotri1handleMatrixRow(k=.k, j=.j, value=.r,
+                                     fix=.rf, unfix=.ru, env=env)
+        .j <- .j + 1
+        if (.k > length(.r)) {
+          break
         }
       }
       env$eta1 <- env$eta1 + .num
     } else if (.num - length(.n) < 0) {
+      if (.handleLastExpressionIsCndForForm2(x2, x3, env)) {
+        return(invisible())
+      }
       .expr <- paste(.deparse1(x2), "~", .deparse1(x3))
       stop("number named variables and lower triangular matrix size do not match:\n",
            .expr)
     } else {
       ## in this case
+      if (.handleLastExpressionIsCndForForm2(x2, x3, env)) {
+        return(invisible())
+      }
       .expr <- .deparse1(eval(parse(text=paste0("quote(", paste(c(.n, paste0("varName", length(.n) + seq_len(.num - length(.n)))), collapse="+"), "~ 0)"))))
       .expr <- paste0("  '", substr(.expr, 1, nchar(.expr) - 1))
       .expr <- .pasteLotri(.expr, x3)
+
       stop("number named variables and lower triangular matrix size do not match\n  did you mean something like:\n", .expr, call. = FALSE)
     }
   } else {
+    if (.handleLastExpressionIsCndForForm2(x2, x3, env)) {
+      return(invisible())
+    }
     stop("matrix expression should be 'name ~ c(lower-tri)'", call. = FALSE)
   }
 }
 
+#' Handle Tilde LHS Sum for Lotri
+#'
+#' This internal function processes the left-hand side of a tilde
+#' expression for the Lotri package.  These are used as the names of the matrix.
+#'
+#' ie x + y + z ~ ...
+#'
+#' @param x Expression. The expression to be evaluated.
+#'
+#' @param env Environment. The environment containing the necessary
+#'   variables and data frames.
+#'
+#' @return None. The function modifies the environment `env` by adding to its data frame `df` and other variables.
+#' @keywords internal
+#' @noRd
 .fcallTildeLhsSum <- function(x, env) {
   ## et1+et2+et3~NULL lower triangular matrix
   if (any(tolower(as.character(x[[3]][[1]])) ==
@@ -339,6 +530,7 @@ NULL
     .lotri1(x[[2]], x[[3]], env)
   } else {
     .val <- try(eval(x[[3]], envir=.lotriParentEnv), silent = TRUE)
+    names(.val) <- NULL
     if (is.numeric(.val) || is.integer(.val)) {
       env$netas <- 1
       env$eta1 <- env$eta1 + 1
@@ -355,27 +547,51 @@ NULL
           .cnd <- x[[3]][[3]]
           .cndFull <- .parseCondition(.cnd, envir = env)
           .cnd <- .cndFull[[1]]
+          if (exists("lastCnd", env)) {
+            if (env$lastCnd == .cnd) {
+              .lotri1(x[[2]], x[[3]][[2]], env)
+              return(invisible())
+            }
+          }
           ## Each condition is parsed so this new environment
           ## should not be elsewhere
           .env2 <- new.env(parent = emptyenv())
+          .env2$isCov <- env$isCov
+          .env2$rcm  <- env$rcm
           .env2$df <- NULL
           .env2$eta1 <- 0L
+          .env2$lastN <- 0L
           env$cnd <- unique(c(env$cnd, .cnd))
+          env$lastCnd <- .cnd
           env[[.cnd]] <- .env2
           env[[paste0(.cnd, ".extra")]] <- .cndFull[[2]]
-          .val <- try(eval(x[[3]][[2]], envir=.lotriParentEnv), silent = TRUE)
-          if ((length(.val) == 1) &&
-                (is.numeric(.val) || is.integer(.val))) {
-            .env2$netas <- 1
-            .env2$eta1 <- .env2$eta1 + 1
+          .val <- .lotriParseMat(x[[3]][[2]], env=env, noMat=TRUE)
+          .fix <- .val[[2]]
+          .unfix <- .val[[3]]
+          .val <- .val[[1]]
+          if (length(.val) >= 2L &&
+                length(.val) == env$lastN+1) {
+            .env2$df <- env$df
+            .env2$eta1 <- env$eta1
+            .env2$lastN <- env$lastN
+            .env2$names <- env$names
+            # moved to .env2 for parsing
+            env$df <- NULL
+            env$lastN <- 0
+            env$eta1 <- 0
+            env$names <- character(0)
+            .lotri1(x[[2]], x[[3]][[2]], .env2)
+          } else if ((length(.val) == 1) &&
+                       (is.numeric(.val) || is.integer(.val))) {
+            .env2$netas <- 1L
+            .env2$eta1 <- .env2$eta1 + 1L
             .env2$names <- c(.env2$names, as.character(x[[2]]))
             .env2$df <- rbind(
               .env2$df,
               data.frame(
                 i = .env2$eta1, j = .env2$eta1,
                 x = .val,
-                fix=FALSE, unfix=FALSE)
-            )
+                fix=.fix, unfix=.unfix))
           } else {
             .lotri1(x[[2]], x[[3]][[2]], .env2)
           }
@@ -389,6 +605,38 @@ NULL
   }
 }
 
+.isKnownCall <- function(x) {
+  if (is.call(x) && length(x) >= 1) {
+    return(tolower(as.character(x[[1]])) %in%
+             c("fix", "fixed", "unfix", "unfixed", "var", "sd", "cor", "cov", "chol"))
+  }
+  FALSE
+}
+
+#' Handle Matrix Expressions with Tilde
+#'
+#' This function processes matrix expressions of the form `name ~ c(lower-tri)`.
+#' It validates the expression, evaluates it, and updates the environment with
+#' the results.
+#'
+#' @param x A language object representing the expression to be evaluated.
+#' @param env An environment where the results of the evaluation will be stored.
+#'
+#' @details
+#' The function performs the following steps:
+#' 1. Checks if the length of `x` is 3. If not, it attempts to provide a helpful
+#'    error message suggesting the correct format.
+#' 2. If the right-hand side of the expression (`x[[3]]`) is a single name and
+#'    exists in the parent environment, it evaluates and replaces it.
+#' 3. If the right-hand side is a single numeric value, it updates the environment
+#'    with the new matrix element.
+#' 4. If the right-hand side is more complex, it delegates to another function
+#'    `.fcallTildeLhsSum`.
+#'
+#' @return This function does not return a value. It updates the provided environment.
+#'
+#' @noRd
+#'
 .fCallTilde <- function(x, env) {
   if (length(x) != 3) {
     .possible <- try(.deparse1(eval(parse(text=paste("quote(variableName", .deparse1(x), ")")))), silent=TRUE)
@@ -398,18 +646,67 @@ NULL
     }
     stop(.err, call. = FALSE)
   }
-  if (length(x[[3]]) == 1) {
+  if (length(x[[3]]) == 1L &&
+        is.name(x[[3]]) &&
+        exists(as.character(x[[3]]), envir=.lotriParentEnv)) {
+    x[[3]] <- str2lang(deparse1(get(as.character(x[[3]]), envir=.lotriParentEnv)))
+  }
+  .fix <- FALSE
+  .unfix <- FALSE
+  .x3 <- x[[3]]
+  if (length(.x3) == 2L &&
+        identical(.x3[[1]], quote(`c`))) {
+    .x3t <- eval(.x3, envir=.lotriParentEnv)
+    if (length(.x3t) == 1L && is.numeric(.x3t)) {
+      .x3 <- .x3t
+    }
+  } else if (length(.x3) == 2L &&
+               .isFixedElt(.x3[[1]]) &&
+               !.isKnownCall(.x3[[2]])) {
+    .x3t <- .x3
+    .x3t[[1]] <- quote(`c`)
+    .x3t <- eval(.x3t, envir=.lotriParentEnv)
+    if (length(.x3t) == 1L && is.numeric(.x3t)) {
+      .x3 <- .x3t
+      .fix <- TRUE
+    }
+  } else if (length(.x3) == 2L &&
+               .isUnfixedElt(.x3[[1]]) &&
+               !.isKnownCall(.x3[[2]])) {
+    .x3t <- .x3
+    .x3t[[1]] <- quote(`c`)
+    .x3t <- eval(.x3t, envir=.lotriParentEnv)
+    if (length(.x3t) == 1L && is.numeric(.x3t)) {
+      .x3 <- .x3t
+      .unfix <- TRUE
+    }
+  } else if (length(.x3) == 2L &&
+               !.isKnownCall(.x3)){
+    .x3t <- try(eval(.x3, envir=.lotriParentEnv), silent=TRUE)
+    if (!inherits(.x3t, "try-error") &&
+          length(.x3t) == 1L &&
+          is.numeric(.x3t)) {
+      .x3 <- .x3t
+    }
+  }
+  if (length(.x3) == 1) {
+    .resetLastN(env)
     ## et1 ~ 0.2
-    env$netas <- 1
-    env$eta1 <- env$eta1 + 1
-    env$names <- c(env$names, as.character(x[[2]]))
-    env$df <- rbind(
-      env$df,
-      data.frame(
-        i = env$eta1,
-        j = env$eta1,
-        x = as.numeric(eval(x[[3]], envir=.lotriParentEnv)),
-        fix=FALSE, unfix=FALSE))
+    if (is.numeric(.x3)) {
+      env$lastN <- 1
+      env$netas <- 1
+      env$eta1 <- env$eta1 + 1
+      env$names <- c(env$names, as.character(x[[2]]))
+      env$df <- rbind(
+        env$df,
+        data.frame(
+          i = env$eta1,
+          j = env$eta1,
+          x = setNames(eval(.x3, envir=.lotriParentEnv), NULL),
+          fix=.fix, unfix=.unfix))
+    } else {
+      stop("cannot figure out expression `", deparse1(x), "` in lotri while handling `~`")
+    }
   } else {
     .fcallTildeLhsSum(x, env)
   }
@@ -421,6 +718,7 @@ NULL
   } else if (identical(x[[1]], quote(`{`))) {
     .x <- x[-1]
     for (.i in seq_along(.x)) {
+      ##.curLine <- .f(.x[[.i]], env=env)
       .curLine <- try(.f(.x[[.i]], env=env), silent=TRUE)
       if (inherits(.curLine, "try-error")) {
         env$.hasErr <- TRUE
@@ -435,8 +733,10 @@ NULL
     }
     env$matrix <- eval(x, envir=.lotriParentEnv)
   } else if (identical(x[[1]], quote(`=`)) ||
-               identical(x[[1]], quote(`<-`)) ||
-               identical(x[[1]], quote(`label`)) ||
+               identical(x[[1]], quote(`<-`))) {
+    ## these are handled in .parseThetaEst()
+    .resetLastN(env, 0L)
+  } else if (identical(x[[1]], quote(`label`)) ||
                identical(x[[1]], quote(`backTransform`))) {
     ## these are handled in .parseThetaEst()
   } else {
@@ -699,10 +999,61 @@ NULL
   return(ret)
 }
 
-.lotriGetMatrixFromEnv <- function(env) {
+#' This asserts the covariance values are zero when variances are zero
+#'
+#' @param ret matrix to consider
+#' @param cnd level currently being examined
+#' @return the negative indexes of the zero diagonals
+#' @noRd
+#' @author Matthew L. Fidler
+.assertErrZeroDiag <- function(ret, cnd) {
+  .cnd <- ""
+  if (!is.null(cnd)) {
+    .cnd <- paste0(", level ", cnd)
+  }
+  .zd <- integer(0)
+  for (idx1 in seq_len(nrow(ret))) {
+    .zeroDiag <- ret[idx1, idx1] == 0
+    if (.zeroDiag) {
+      .zd <- c(.zd, -idx1)
+      .nonDiagidx <- setdiff(seq_len(ncol(ret)), idx1)
+      for (idx2 in .nonDiagidx) {
+        .badValue <- FALSE
+        if (ret[idx1, idx2] != 0) {
+          # already symmetric no need to check idx2, idx1
+          .idxRow <- idx1
+          .idxCol <- idx2
+          .badValue <- TRUE
+        }
+        if (.badValue) {
+          stop("if diagonals are zero, off-diagonals must be zero for covariance matrices (row ", .idxRow, ", column ", .idxCol, .cnd, ")",
+               call.=FALSE)
+        }
+      }
+    }
+  }
+  return(.zd)
+}
+#'
+#' Create the matrix from the lotri environment
+#'
+#' @param env lotri environment
+#' @param cnd current condition
+#' @return matrix
+#' @noRd
+#' @author Bill Denney & Matthew L. Fidler
+.lotriGetMatrixFromEnv <- function(env, cnd=NULL, fun=NULL) {
+  if (is.null(env$df)) {
+    return(matrix(nrow=0, ncol=0))
+  }
+  if (length(env$df$i) == 0L) {
+    return(matrix(nrow=0, ncol=0))
+  }
+  env$eta1 <- max(env$df$i)
   .ret <- diag(env$eta1)
-  .retF <- matrix(FALSE, dim(.ret)[1], dim(.ret)[1])
-  .retU <- matrix(FALSE, dim(.ret)[1], dim(.ret)[1])
+  .n <- dim(.ret)[1]
+  .retF <- matrix(FALSE, dim(.ret)[1], .n)
+  .retU <- matrix(FALSE, dim(.ret)[1], .n)
   for (.i in seq_along(env$df$i)) {
     .ret[env$df$i[.i], env$df$j[.i]] <- env$df$x[.i]
     .retF[env$df$i[.i], env$df$j[.i]] <- env$df$fix[.i]
@@ -711,6 +1062,13 @@ NULL
   dimnames(.ret) <- list(env$names, env$names)
   dimnames(.retF) <- list(env$names, env$names)
   dimnames(.retU) <- list(env$names, env$names)
+  if (is.logical(env$rcm) && env$rcm && .n >= 1 &&
+        !lotriIsBlockMat(.ret)) {
+    .ret <- rcm(.ret)
+    env$names <- dimnames(.ret)[[1]]
+    .retF <- .retF[env$names, env$names]
+    .retU <- .retU[env$names, env$names]
+  }
   if (any(.retF)) {
     class(.ret) <- c("lotriFix", class(.ret))
     attr(.ret, "lotriFix") <- .retF
@@ -718,7 +1076,38 @@ NULL
     class(.ret) <- c("lotriFix", class(.ret))
     attr(.ret, "lotriUnfix") <- .retU
   }
-  return(.ret)
+  # Verify that zero diagonals have zero off diagonals (rxode2#481)
+  if (env$isCov) {
+    .zd <- .assertErrZeroDiag(.ret, cnd)
+  }
+  .ret
+}
+#' This modifies the call information to include the default arguments explicitly
+#'
+#' @param call call list to modify
+#' @param cov Is this a covariance matrix (boolean/function; default=`FALSE`).
+#' @param envir environment where lotri is evaluated
+#' @param default default level of variability (id=default)
+#' @return calling list incluing cov, envir and default
+#' @noRd
+#' @author Matthew L. Fidler
+.lotriGetFullCall <- function(call, cov=FALSE, rcm=FALSE,
+                              envir = parent.frame(),
+                             default = "id") {
+  .fullCall <- call
+  if (!any(names(.fullCall) %in% "cov")) {
+    .fullCall <- c(.fullCall, list(cov=cov))
+  }
+  if (!any(names(.fullCall) %in% "rcm")) {
+    .fullCall <- c(.fullCall, list(rcm=rcm))
+  }
+  if (!any(names(.fullCall) %in% "default")) {
+    .fullCall <- c(.fullCall, list(default=default))
+  }
+  if (!any(names(.fullCall) %in% "envir")) {
+    .fullCall <- c(.fullCall, list(envir=envir))
+  }
+  .fullCall
 }
 
 #' Easily Specify block-diagonal matrices with lower triangular info
@@ -727,6 +1116,33 @@ NULL
 #'
 #' @param ... Other arguments treated as a list that will be
 #'     concatenated then reapplied to this function.
+#'
+#' @param cov either a boolean or a function accepting a matrix input.
+#'
+#'   When a boolean, `cov` describes if this matrix definition is
+#'   actually a rxode2/nlmixr2-style covariance matrix.
+#'   If so, `lotri()` will enforce certain regularity conditions:
+#'
+#'   - When diagonal elements are zero, the off-diagonal elements are
+#'     zero. This means the covariance element is fixed to zero and
+#'     not truly part of the covariance matrix in general.
+#'
+#'   - For the rest of the matrix, `lotri` will check that it is
+#'     non-positive definite (which is required for covariance matrix in
+#'     general)
+#'
+#'   It is sometimes difficult to adjust covariance matrices to be
+#'   non-positive definite.  For this reason `cov` may also be a
+#'   function accepting a matrix input and returning a non-positive
+#'   definite matrix from this matrix input.  When this is a function,
+#'   it is equivalent to `cov=TRUE` with the additional ability to
+#'   correct the matrix to be non-positive definite if needed.
+#'
+#' @param rcm logical; if `TRUE`, the matrix will be reordered to
+#'   change the matrix to a banded matrix, which is easier to express
+#'   in `lotri` than a full matrix.  The RCM stands for the reverse
+#'   Cuthill McKee (RCM) algorithm which is used for this matrix permutation.
+#'   (see `rcm()`)
 #'
 #' @inheritParams base::eval
 #' @inheritParams as.lotri
@@ -827,8 +1243,24 @@ NULL
 #' @importFrom stats setNames
 #' @importFrom utils str
 #' @export
-lotri <- function(x, ..., envir = parent.frame(),
+lotri <- function(x, ..., cov=FALSE, rcm=FALSE,
+                  envir = parent.frame(),
                   default = "id") {
+  .fun <- NULL
+  if (length(cov) != 1 || !is.logical(cov) || is.na(cov)) {
+    if (is.function(cov)) {
+      .fun <- cov
+      cov <- TRUE
+    } else if (is.logical(cov) && cov) {
+      .fun <- lotriNearPD
+    } else {
+      stop("'cov' must be a length 1 non-NA logical or function",
+           call.=FALSE)
+    }
+  }
+  if (missing(x)) {
+    return(lotri({}, cov=cov, rcm=rcm, envir=envir, default=default))
+  }
   if (is.null(.lotriParentEnv)) {
     assignInMyNamespace(".lotriParentEnv", envir)
     on.exit(assignInMyNamespace(".lotriParentEnv", NULL))
@@ -862,7 +1294,11 @@ lotri <- function(x, ..., envir = parent.frame(),
     .ret <- x
   } else {
     .env <- new.env(parent = emptyenv())
+    .env$isCov <- cov
+    .env$fun <- .fun
+    .env$rcm <- rcm
     .env$df <- NULL
+    .env$lastN <- 0
     .env$matrix <- NULL
     .env$eta1 <- 0L
     .env$cnd <- character()
@@ -883,14 +1319,18 @@ lotri <- function(x, ..., envir = parent.frame(),
       return(.amplifyRetWithDfEst(.env$matrix, .est))
     }
     if (length(.env$cnd) == 0L) {
-      .ret <- .lotriGetMatrixFromEnv(.env)
+      .ret <- .lotriGetMatrixFromEnv(.env, fun=.env$fun)
     } else {
       .lstC <- list()
       .other <- NULL
       .prop <- NULL
-      if (length(.call) > 1) {
+      .ndef <- sum(names(.call) %in% c("cov", "rcm", "default", "envir"))
+      if (length(.call) - .ndef > 1) {
         .call <- .call[-1]
-        .other <- do.call("lotri", .call, envir = envir)
+        .other <- do.call("lotri",
+                          .lotriGetFullCall(.call, cov=cov, rcm=rcm,
+                                            default=default, envir=envir),
+                          envir=envir)
         if (inherits(.other, "lotri")) {
           .prop <- attr(.other, "lotri")
           class(.other) <- NULL
@@ -899,20 +1339,28 @@ lotri <- function(x, ..., envir = parent.frame(),
       if (any(.env$cnd == default)) {
         ## amplify with default
         .env2 <- .env[[default]]
+        .env2$isCov <- .env$isCov
+        .env2$rcm <- .env$rcm
+        .env2$fun <- .env$fun
         .env2$df <- rbind(.env2$df, .env$df)
+        .env2$lastN <- 0
         .env2$names <- c(.env2$names, .env$names)
         .env2$eta1 <- .env$eta1 + .env2$eta1
       } else if (!is.null(.env$df)) {
         .env[[default]] <- new.env(parent=emptyenv())
         .env2 <- .env[[default]]
         .env2$df <- .env$df
+        .env2$lastN <- 0
+        .env2$isCov <- .env$isCov
+        .env2$rcm <- .env$rcm
+        .env2$fun <- .env$fun
         .env2$eta1 <- .env$eta1
         .env2$names <- .env$names
         .env$cnd <- c(default, .env$cnd)
       }
       for (.j in .env$cnd) {
         .env2 <- .env[[.j]]
-        .ret0 <- .lotriGetMatrixFromEnv(.env2)
+        .ret0 <- .lotriGetMatrixFromEnv(.env2, cnd=.j, fun=.env2$fun)
         .extra <- .env[[paste0(.j, ".extra")]]
         if (!is.null(.extra)) {
           if (is.null(.prop)) {
@@ -927,11 +1375,13 @@ lotri <- function(x, ..., envir = parent.frame(),
         }
         if (inherits(.other, "list")) {
           if (any(names(.other) == .j)) {
-            .ret0 <- do.call("lotri", list(.ret0, .other[[.j]],
-              envir = envir
-            ),
-            envir = envir
-            )
+            .fullCall <- .lotriGetFullCall(list(.ret0, .other[[.j]]),
+                                           cov=cov,
+                                           rcm=rcm,
+                                           default=default,
+                                           envir=envir)
+            .ret0 <- do.call("lotri", .fullCall,
+                             envir = envir)
             .other <- .other[names(.other) != .j]
           }
         }
@@ -969,7 +1419,12 @@ lotri <- function(x, ..., envir = parent.frame(),
       return(.amplifyRetWithDfEst(.lst, .est))
     }
     .call <- .call[-1]
-    .tmp <- do.call("lotri", .call, envir = envir)
+    .fullCall <- .lotriGetFullCall(.call,
+                                   cov=cov,
+                                   rcm=rcm,
+                                   default=default,
+                                   envir=envir)
+    .tmp <- do.call("lotri", .fullCall, envir=envir)
     if (any(names(.tmp) == .fullCnd)) {
       if (!is.null(.prop)) {
         .tmpL <- attr(.tmp, "lotri")
@@ -984,7 +1439,8 @@ lotri <- function(x, ..., envir = parent.frame(),
         )
         .prop <- c(.prop, .tmp1)
       }
-      .ret <- lotri(list(.ret, .tmp[[.fullCnd]]), envir = envir)
+      .ret <- lotri(list(.ret, .tmp[[.fullCnd]]),
+                    cov=cov, rcm=rcm, default=default, envir = envir)
       .w <- which(names(.tmp) != .fullCnd)
       if (length(.w) > 0L) {
         .tmp <- .tmp[.w]
@@ -1013,23 +1469,36 @@ lotri <- function(x, ..., envir = parent.frame(),
       return(.amplifyRetWithDfEst(.ret, .est))
     }
   } else {
-    if (length(.call) == 1L) {
+    .ndef <- sum(names(.call) %in% c("cov", "rcm", "default", "envir"))
+    if (length(.call) - .ndef == 1L) {
       return(.amplifyRetWithDfEst(.ret, .est))
     }
     .call <- .call[-1]
-    .tmp <- do.call("lotri", .call, envir = envir)
+    .fullCall <- .lotriGetFullCall(.call,
+                                   cov=cov,
+                                   rcm=rcm,
+                                   default=default,
+                                   envir=envir)
+    .tmp <- do.call("lotri", .fullCall, envir=envir)
     if (inherits(.tmp, "list")) {
       if (any(names(.tmp) == "")) {
         .w <- which(names(.tmp) == "")
-        .lst <- list(.ret, .tmp[[.w]], envir = envir)
-        .tmp[[.w]] <- do.call("lotri", .lst, envir = envir)
+        .lst <- list(.ret, .tmp[[.w]])
+        .fullCall <- .lotriGetFullCall(.lst,
+                                       cov=cov,
+                                       rcm=rcm,
+                                       default=default,
+                                       envir=envir)
+        .tmp[[.w]] <- do.call("lotri", .fullCall, envir = envir)
         return(.amplifyRetWithDfEst(.tmp, .est))
       } else {
         .ret <- c(list(.ret), .tmp)
         return(.amplifyRetWithDfEst(.ret, .est))
       }
     } else {
-      .ret <- lotri(c(list(.ret), list(.tmp)), envir = envir)
+      .ret <- lotri(c(list(.ret), list(.tmp)),
+                    cov=cov, rcm=rcm, default=default,
+                    envir = envir)
       if (inherits(.tmp, "lotri")) {
         attr(.ret, "lotri") <- .amplifyFinal(.ret, attr(.tmp, "lotri"))
         class(.ret) <- "lotri"
@@ -1238,7 +1707,7 @@ lotriMat <- function(matList, format = NULL, start = 1L) {
 lotriSep <- function(x, above, below,
                      aboveStart = 1L, belowStart = 1L) {
   .Call(`_lotriSep`, x, above, below,
-    aboveStart = as.integer(aboveStart), belowStart = as.integer(belowStart),
-    PACKAGE = "lotri"
-  )
+        aboveStart = as.integer(aboveStart), belowStart = as.integer(belowStart),
+        PACKAGE = "lotri"
+        )
 }

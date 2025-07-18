@@ -1,3 +1,7 @@
+# lotri 1.0.1
+
+* Now support labels on etas or covariances
+
 # lotri 1.0.0
 
 * Added a new way of specifying lotri matrices:

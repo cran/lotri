@@ -1,11 +1,11 @@
-f32ba5cd75830f8c3060b334bf4a1d50 *DESCRIPTION
+4f952b2d39515354387973c55da3f27d *DESCRIPTION
 1420d63360d39ced571fb01bfdf732a1 *NAMESPACE
-9ccade85e211372df4c44b019cf40a17 *NEWS.md
+d54572aa32ac703101d88199466349d3 *NEWS.md
 846611d5c90de9fe02ad4c7df767ac1f *R/as.data.frame.R
 a6d3d618143725a75d5e3f7bdb667443 *R/as.expression.R
 e5db5078b7fb318e678201f06a391b0f *R/as.lotri.R
 93e89aa6255bb4d5a25eb7348f6bc27a *R/err.R
-2908c80ad9d6e8af8b8b9300e168a687 *R/lotri.R
+e9ec9d57b791773ca74e548ba7f97eee *R/lotri.R
 54e89ef1d9f779a5e60d3418ca5e040a *R/lotriMatInv.R
 c303ba1e4b04cb4389c894fb379c2749 *R/lotriNearPD.R
 8cd7098bf69b1fa2cb55a56e69decc8d *R/lotriPtrs.R
@@ -16,7 +16,7 @@ e38cc3164387a92452c8c733166342f2 *R/print.R
 ad6cf9d4dc0e24f76e0fa669c423ae6b *build/vignette.rds
 fd1876d4850c3ff5968f07e2b234452c *inst/doc/lotri-motivation.R
 cace1a569a3225da54ad2464c640bc4e *inst/doc/lotri-motivation.Rmd
-a862ce86f5e6996714b38840656c9699 *inst/doc/lotri-motivation.html
+e1091658b341ab3a04ffbbd2babd3e17 *inst/doc/lotri-motivation.html
 ddcdb7615daf1df4f2caacf38b000578 *inst/include/lotri.h
 862be03bfadd3848e7137e530047a4d8 *inst/lotriHex.png
 25fce8319fcd2b3e2163d854eb7a49f4 *man/as.lotri.Rd
@@ -66,6 +66,7 @@ c212bd734a84a51749e1311ae734592b *tests/testthat/test-as.data.frame.R
 b1070e023bb4f1a032778702549340cf *tests/testthat/test-estimate-matrix-combination.R
 18ac4c5a2f86f9712da535b1ed8a3204 *tests/testthat/test-fixed-combine.R
 7ffabedb51f288e9d2b7321c13dd4613 *tests/testthat/test-fixed.R
+7deb4dc2ce59f66e9031c2f568354919 *tests/testthat/test-iov.R
 f8fd4d58b3b211b792b2b31b221f864b *tests/testthat/test-label.R
 1ed12a67356208fc75569a2ccb3a8850 *tests/testthat/test-line-form.R
 0a3b2d982ee6b5c70912f8f3f910b038 *tests/testthat/test-lotri-matrix.R

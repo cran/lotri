@@ -12,7 +12,7 @@
 
 <meta name="author" content="Matthew Fidler" />
 
-<meta name="date" content="2025-08-29" />
+<meta name="date" content="2026-03-10" />
 
 <title>Lotri Motivation</title>
 
@@ -29,46 +29,31 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
-  }
-});
-</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -80,55 +65,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -356,146 +340,172 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Lotri Motivation</h1>
 <h4 class="author">Matthew Fidler</h4>
-<h4 class="date">2025-08-29</h4>
+<h4 class="date">2026-03-10</h4>
 
 
 
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
-<p>This was made to allow people (like me) to specify lower triangular matrices similar to the domain specific language implemented in nlmixr. Originally I had it included in <code>RxODE</code>, but thought it may have more general applicability, so I separated it into a new package.</p>
-<p>For me, specifying the matrices in this way is easier than specifying them using R’s default matrix. For instance to fully specify a simple 2x2 matrix, in R you specify:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">dimnames=</span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</span></code></pre></div>
+<p>This was made to allow people (like me) to specify lower triangular
+matrices similar to the domain specific language implemented in nlmixr.
+Originally I had it included in <code>RxODE</code>, but thought it may
+have more general applicability, so I separated it into a new
+package.</p>
+<p>For me, specifying the matrices in this way is easier than specifying
+them using R’s default matrix. For instance to fully specify a simple
+2x2 matrix, in R you specify:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">ncol=</span><span class="dv">2</span>,<span class="at">dimnames=</span><span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</span></code></pre></div>
 <p>With <code>lotri</code>, you simply specify:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">library</span>(lotri)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">library</span>(microbenchmark)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>mat &lt;-<span class="st"> </span><span class="kw">lotri</span>(a<span class="op">+</span>b <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>                     <span class="fl">0.5</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p>I find it more legible and easier to specify, especially if you have a more complex matrix. For instance with the more complex matrix:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>mat &lt;-<span class="st"> </span><span class="kw">lotri</span>({</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    a<span class="op">+</span>b <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>            <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>    c <span class="op">~</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>    d <span class="op">+</span>e <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>             <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(lotri)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">library</span>(microbenchmark)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">lotri</span>(a<span class="sc">+</span>b <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>                     <span class="fl">0.5</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p>I find it more legible and easier to specify, especially if you have
+a more complex matrix. For instance with the more complex matrix:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">lotri</span>({</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    a<span class="sc">+</span>b <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>            <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    c <span class="sc">~</span> <span class="dv">1</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    d <span class="sc">+</span>e <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>             <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>})</span></code></pre></div>
 <p>To fully specify this in base R you would need to use:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>                <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>              <span class="dt">nrow=</span><span class="dv">5</span>, <span class="dt">ncol=</span><span class="dv">5</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>              <span class="dt">dimnames=</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>)))</span></code></pre></div>
-<p>Of course with the excellent <code>Matrix</code> package this is a bit easier:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">library</span>(Matrix)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>,<span class="dt">dimnames=</span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>mat &lt;-<span class="st"> </span><span class="kw">bdiag</span>(<span class="kw">list</span>(mat, <span class="kw">matrix</span>(<span class="dv">1</span>), mat))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="co">## Convert back to standard matrix</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>mat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mat)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a><span class="co">##</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="kw">dimnames</span>(mat) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>                <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>              <span class="at">nrow=</span><span class="dv">5</span>, <span class="at">ncol=</span><span class="dv">5</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>              <span class="at">dimnames=</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>)))</span></code></pre></div>
+<p>Of course with the excellent <code>Matrix</code> package this is a
+bit easier:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(Matrix)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">ncol=</span><span class="dv">2</span>,<span class="at">dimnames=</span><span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)))</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">bdiag</span>(<span class="fu">list</span>(mat, <span class="fu">matrix</span>(<span class="dv">1</span>), mat))</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">## Convert back to standard matrix</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mat)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="fu">dimnames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>))</span></code></pre></div>
 <p>Regardless, I think <code>lotri</code> is a bit easier to use.</p>
 </div>
 <div id="creating-lists-of-matrices-with-attached-properties" class="section level1">
 <h1>Creating lists of matrices with attached properties</h1>
-<p><code>lotri</code> also allows lists of matrices to be created by conditioning on an <code>id</code> with the <code>|</code> syntax.</p>
+<p><code>lotri</code> also allows lists of matrices to be created by
+conditioning on an <code>id</code> with the <code>|</code> syntax.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>mat &lt;-<span class="st"> </span><span class="kw">lotri</span>({</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>    a<span class="op">+</span>b <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>            <span class="fl">0.5</span>, <span class="dv">1</span>) <span class="op">|</span><span class="st"> </span>id</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>    c <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>occ</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>    d <span class="op">+</span>e <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>             <span class="fl">0.5</span>, <span class="dv">1</span>) <span class="op">|</span><span class="st"> </span><span class="kw">id</span>(<span class="dt">lower=</span><span class="dv">3</span>, <span class="dt">upper=</span><span class="dv">2</span>, <span class="dt">omegaIsChol=</span><span class="ot">FALSE</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>})</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a><span class="kw">print</span>(mat)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a><span class="co">#&gt; $id</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a><span class="co">#&gt;     d   e</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a><span class="co">#&gt; d 1.0 0.5</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a><span class="co">#&gt; e 0.5 1.0</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a><span class="co">#&gt; </span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a><span class="co">#&gt; $occ</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a><span class="co">#&gt;   c</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a><span class="co">#&gt; c 1</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true"></a><span class="co">#&gt; </span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true"></a><span class="co">#&gt; Properties: lower, upper, omegaIsChol</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true"></a><span class="kw">print</span>(mat<span class="op">$</span>lower)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true"></a><span class="co">#&gt; $id</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true"></a><span class="co">#&gt; d e </span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true"></a><span class="co">#&gt; 3 3 </span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true"></a><span class="co">#&gt; </span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true"></a><span class="co">#&gt; $occ</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true"></a><span class="co">#&gt;    c </span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true"></a><span class="co">#&gt; -Inf</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true"></a><span class="kw">print</span>(mat<span class="op">$</span>upper)</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true"></a><span class="co">#&gt; $id</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true"></a><span class="co">#&gt; d e </span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true"></a><span class="co">#&gt; 2 2 </span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true"></a><span class="co">#&gt; </span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true"></a><span class="co">#&gt; $occ</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true"></a><span class="co">#&gt;   c </span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true"></a><span class="co">#&gt; Inf</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true"></a><span class="kw">print</span>(mat<span class="op">$</span>omegaIsChol)</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true"></a><span class="co">#&gt; $id</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true"></a><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
-<p>This gives a list of matrix(es) conditioned on the variable after the <code>|</code>. It also can add properties to each list that can be accessible after the list of matrices is returned, as shown in the above example. To do this, you simply have to enclose the properties after the conditional variable. That is <code>et1 ~ id(lower=3)</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">lotri</span>({</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    a<span class="sc">+</span>b <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>            <span class="fl">0.5</span>, <span class="dv">1</span>) <span class="sc">|</span> id</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    c <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> occ</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    d <span class="sc">+</span>e <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>             <span class="fl">0.5</span>, <span class="dv">1</span>) <span class="sc">|</span> <span class="fu">id</span>(<span class="at">lower=</span><span class="dv">3</span>, <span class="at">upper=</span><span class="dv">2</span>, <span class="at">omegaIsChol=</span><span class="cn">FALSE</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>})</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="fu">print</span>(mat)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; $id</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt;     d   e</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; d 1.0 0.5</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; e 0.5 1.0</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; $occ</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt;   c</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; c 1</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt; Properties: lower, upper, omegaIsChol</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="fu">print</span>(mat<span class="sc">$</span>lower)</span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; $id</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt; d e </span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt; 3 3 </span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt; $occ</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="co">#&gt;    c </span></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="co">#&gt; -Inf</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="fu">print</span>(mat<span class="sc">$</span>upper)</span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="co">#&gt; $id</span></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a><span class="co">#&gt; d e </span></span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a><span class="co">#&gt; 2 2 </span></span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a><span class="co">#&gt; $occ</span></span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="co">#&gt;   c </span></span>
+<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="co">#&gt; Inf</span></span>
+<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a><span class="fu">print</span>(mat<span class="sc">$</span>omegaIsChol)</span>
+<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a><span class="co">#&gt; $id</span></span>
+<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
+<p>This gives a list of matrix(es) conditioned on the variable after the
+<code>|</code>. It also can add properties to each list that can be
+accessible after the list of matrices is returned, as shown in the above
+example. To do this, you simply have to enclose the properties after the
+conditional variable. That is <code>et1 ~ id(lower=3)</code>.</p>
 <div id="combining-symmetric-named-matrices" class="section level2">
 <h2>Combining symmetric named matrices</h2>
-<p>Now there is even a faster way to do a similar banded matrix concatenation with <code>lotriMat</code></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>testList &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">lotri</span>({et2 <span class="op">+</span><span class="st"> </span>et3 <span class="op">+</span><span class="st"> </span>et4 <span class="op">~</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>                            <span class="fl">0.1</span>, <span class="dv">20</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>                            <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="dv">30</span>)}),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>                     <span class="kw">lotri</span>(et5 <span class="op">~</span><span class="st"> </span><span class="dv">6</span>),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>                     <span class="kw">lotri</span>(et1<span class="op">+</span>et6 <span class="op">~</span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="dv">1</span>)),</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>                     <span class="kw">matrix</span>(<span class="kw">c</span>(1L, 0L, 0L, 1L), <span class="dv">2</span>, <span class="dv">2</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>                            <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;et7&quot;</span>, <span class="st">&quot;et8&quot;</span>),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>                                          <span class="kw">c</span>(<span class="st">&quot;et7&quot;</span>, <span class="st">&quot;et8&quot;</span>))))</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>matf &lt;-<span class="st"> </span><span class="cf">function</span>(.mats){</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a>  .omega &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(Matrix<span class="op">::</span><span class="kw">bdiag</span>(.mats))</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a>  .d &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="kw">seq_along</span>(.mats),</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a>                      <span class="cf">function</span>(x) {</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a>                        <span class="kw">dimnames</span>(.mats[[x]])[<span class="dv">2</span>]</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a>                      }))</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a>  <span class="kw">dimnames</span>(.omega) &lt;-<span class="st"> </span><span class="kw">list</span>(.d, .d)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a>  <span class="kw">return</span>(.omega)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true"></a>}</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">matf</span>(testList))</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a><span class="co">#&gt;      et2  et3  et4 et5  et1  et6 et7 et8</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true"></a><span class="co">#&gt; et2 40.0  0.1  0.1   0 0.00 0.00   0   0</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true"></a><span class="co">#&gt; et3  0.1 20.0  0.1   0 0.00 0.00   0   0</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true"></a><span class="co">#&gt; et4  0.1  0.1 30.0   0 0.00 0.00   0   0</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true"></a><span class="co">#&gt; et5  0.0  0.0  0.0   6 0.00 0.00   0   0</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true"></a><span class="co">#&gt; et1  0.0  0.0  0.0   0 0.10 0.01   0   0</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true"></a><span class="co">#&gt; et6  0.0  0.0  0.0   0 0.01 1.00   0   0</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true"></a><span class="co">#&gt; et7  0.0  0.0  0.0   0 0.00 0.00   1   0</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true"></a><span class="co">#&gt; et8  0.0  0.0  0.0   0 0.00 0.00   0   1</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true"></a></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">lotriMat</span>(testList))</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true"></a><span class="co">#&gt;      et2  et3  et4 et5  et1  et6 et7 et8</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true"></a><span class="co">#&gt; et2 40.0  0.1  0.1   0 0.00 0.00   0   0</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true"></a><span class="co">#&gt; et3  0.1 20.0  0.1   0 0.00 0.00   0   0</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true"></a><span class="co">#&gt; et4  0.1  0.1 30.0   0 0.00 0.00   0   0</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true"></a><span class="co">#&gt; et5  0.0  0.0  0.0   6 0.00 0.00   0   0</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true"></a><span class="co">#&gt; et1  0.0  0.0  0.0   0 0.10 0.01   0   0</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true"></a><span class="co">#&gt; et6  0.0  0.0  0.0   0 0.01 1.00   0   0</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true"></a><span class="co">#&gt; et7  0.0  0.0  0.0   0 0.00 0.00   1   0</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true"></a><span class="co">#&gt; et8  0.0  0.0  0.0   0 0.00 0.00   0   1</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true"></a></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true"></a></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true"></a>mb &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(<span class="kw">matf</span>(testList),<span class="kw">lotriMat</span>(testList))</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true"></a></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true"></a><span class="kw">print</span>(mb)</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true"></a><span class="co">#&gt; Unit: microseconds</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true"></a><span class="co">#&gt;                expr     min       lq      mean   median       uq      max neval</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true"></a><span class="co">#&gt;      matf(testList) 748.779 789.7725 955.92246 835.3825 1051.675 3635.514   100</span></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true"></a><span class="co">#&gt;  lotriMat(testList)   1.625   2.2355   4.28981   4.7245    5.444   15.089   100</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true"></a><span class="kw">autoplot</span>(mb)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Now there is even a faster way to do a similar banded matrix
+concatenation with <code>lotriMat</code></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>testList <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">lotri</span>({et2 <span class="sc">+</span> et3 <span class="sc">+</span> et4 <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">40</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>                            <span class="fl">0.1</span>, <span class="dv">20</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                            <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="dv">30</span>)}),</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                     <span class="fu">lotri</span>(et5 <span class="sc">~</span> <span class="dv">6</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>                     <span class="fu">lotri</span>(et1<span class="sc">+</span>et6 <span class="sc">~</span><span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="dv">1</span>)),</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>                     <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="dt">L</span>, <span class="dv">0</span><span class="dt">L</span>, <span class="dv">0</span><span class="dt">L</span>, <span class="dv">1</span><span class="dt">L</span>), <span class="dv">2</span>, <span class="dv">2</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>                            <span class="at">dimnames=</span><span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;et7&quot;</span>, <span class="st">&quot;et8&quot;</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>                                          <span class="fu">c</span>(<span class="st">&quot;et7&quot;</span>, <span class="st">&quot;et8&quot;</span>))))</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>matf <span class="ot">&lt;-</span> <span class="cf">function</span>(.mats){</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>  .omega <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Matrix<span class="sc">::</span><span class="fu">bdiag</span>(.mats))</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>  .d <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="fu">seq_along</span>(.mats),</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>                      <span class="cf">function</span>(x) {</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>                        <span class="fu">dimnames</span>(.mats[[x]])[<span class="dv">2</span>]</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>                      }))</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>  <span class="fu">dimnames</span>(.omega) <span class="ot">&lt;-</span> <span class="fu">list</span>(.d, .d)</span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>  <span class="fu">return</span>(.omega)</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>}</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">matf</span>(testList))</span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">#&gt;      et2  et3  et4 et5  et1  et6 et7 et8</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#&gt; et2 40.0  0.1  0.1   0 0.00 0.00   0   0</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#&gt; et3  0.1 20.0  0.1   0 0.00 0.00   0   0</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co">#&gt; et4  0.1  0.1 30.0   0 0.00 0.00   0   0</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; et5  0.0  0.0  0.0   6 0.00 0.00   0   0</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt; et1  0.0  0.0  0.0   0 0.10 0.01   0   0</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt; et6  0.0  0.0  0.0   0 0.01 1.00   0   0</span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#&gt; et7  0.0  0.0  0.0   0 0.00 0.00   1   0</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">#&gt; et8  0.0  0.0  0.0   0 0.00 0.00   0   1</span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">lotriMat</span>(testList))</span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="co">#&gt;      et2  et3  et4 et5  et1  et6 et7 et8</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="co">#&gt; et2 40.0  0.1  0.1   0 0.00 0.00   0   0</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="co">#&gt; et3  0.1 20.0  0.1   0 0.00 0.00   0   0</span></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="co">#&gt; et4  0.1  0.1 30.0   0 0.00 0.00   0   0</span></span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a><span class="co">#&gt; et5  0.0  0.0  0.0   6 0.00 0.00   0   0</span></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="co">#&gt; et1  0.0  0.0  0.0   0 0.10 0.01   0   0</span></span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co">#&gt; et6  0.0  0.0  0.0   0 0.01 1.00   0   0</span></span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co">#&gt; et7  0.0  0.0  0.0   0 0.00 0.00   1   0</span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="co">#&gt; et8  0.0  0.0  0.0   0 0.00 0.00   0   1</span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a>mb <span class="ot">&lt;-</span> <span class="fu">microbenchmark</span>(<span class="fu">matf</span>(testList),<span class="fu">lotriMat</span>(testList))</span>
+<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a><span class="fu">print</span>(mb)</span>
+<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a><span class="co">#&gt; Unit: microseconds</span></span>
+<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a><span class="co">#&gt;                expr      min       lq       mean   median        uq      max</span></span>
+<span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a><span class="co">#&gt;      matf(testList) 1126.194 1159.712 1361.98309 1191.772 1594.3335 5395.469</span></span>
+<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a><span class="co">#&gt;  lotriMat(testList)    2.755    3.442    5.59057    5.490    6.3725   20.930</span></span>
+<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a><span class="co">#&gt;  neval</span></span>
+<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a><span class="co">#&gt;    100</span></span>
+<span id="cb7-52"><a href="#cb7-52" tabindex="-1"></a><span class="co">#&gt;    100</span></span>
+<span id="cb7-53"><a href="#cb7-53" tabindex="-1"></a><span class="fu">autoplot</span>(mb)</span>
+<span id="cb7-54"><a href="#cb7-54" tabindex="-1"></a><span class="co">#&gt; Warning: `aes_string()` was deprecated in ggplot2 3.0.0.</span></span>
+<span id="cb7-55"><a href="#cb7-55" tabindex="-1"></a><span class="co">#&gt; ℹ Please use tidy evaluation idioms with `aes()`.</span></span>
+<span id="cb7-56"><a href="#cb7-56" tabindex="-1"></a><span class="co">#&gt; ℹ See also `vignette(&quot;ggplot2-in-packages&quot;)` for more information.</span></span>
+<span id="cb7-57"><a href="#cb7-57" tabindex="-1"></a><span class="co">#&gt; ℹ The deprecated feature was likely used in the microbenchmark package.</span></span>
+<span id="cb7-58"><a href="#cb7-58" tabindex="-1"></a><span class="co">#&gt;   Please report the issue at</span></span>
+<span id="cb7-59"><a href="#cb7-59" tabindex="-1"></a><span class="co">#&gt;   &lt;https://github.com/joshuaulrich/microbenchmark/issues/&gt;.</span></span>
+<span id="cb7-60"><a href="#cb7-60" tabindex="-1"></a><span class="co">#&gt; This warning is displayed once per session.</span></span>
+<span id="cb7-61"><a href="#cb7-61" tabindex="-1"></a><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
+<span id="cb7-62"><a href="#cb7-62" tabindex="-1"></a><span class="co">#&gt; generated.</span></span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAIAAACb4TnXAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAgAElEQVR4nO3dd0ATZx8H8OfusheEsDcIqCBa3KOKm7oR9161Wgdqq75aR7W21aqtWm1d1UqtVFutWqu17j1woqLIVmTvlZ173j8CyEiQdUHp7/MXudzz3O8u972ZHATGGAEAmEE2dAEANGYQMAAYBAEDgEEQMAAYBAEDgEEQMAAYBAF7K6gufh7QZ86hJLpee9U+/mFsn9Fbw7X12uubaMI2BPaZsidKZ9KpIoQQ/eLXGX0Grb2hqca4utSH586GvVDoX9V6+b+xIQTsraBLj7hy+X6ion57xXkxty7fjM417Z1OnP38+uWw+ELT31/FRS/uXbn2LKs6MVFeWjNo4ILDyfpxa73839iQVeMuAQMEQ3bFJugkNrC9axi1Xv5vbAifKIMCAxYefXJ+w9QPur7fs9+Ij785Fa9C2qRz380ZPbD/4LFzNpyKVxaPqQnbNnXS6pOpJdtebfrtfSs/GjGg38BRM1f9EpZefJCnublucMDikzk5j37/embQh3tidQghpMu6F7pm1phB/foHTpi/4c+IvAr7DpzzMPTz6cMH9Bs8du43R58WlHtbHnt666LJQQP6D50QvPbQw6zSAztN2IbAgIXHX0b8tmRk767+fQMnzP/un7iym2ojRRajc8NDP58+fED/wPHzNv4dIy/XbTUXC0IIFcWe/mHJhyMGBvTtHzTp0+/+iizdNRpeGq9p4n6b27/X4IXHXlV4Q3vvu2ED1lxVayN2jO8duP62ptzyr1GFlRtWWGIIA8ZYsuzcXcXWfoFTp4/u7MAh2O6DPxzgZtdq8OQPR3dy4BCsJsEXizDGGCsPjxJwOm2I1mGMsSYmZJgzmzL36DpkZFBXdxHJch7920sdxlh5YpKU133+ku7W1i16j1z+V7IO6xJ+G+PGIfn2rQOGDe3la80l+c1n/p1KY4yx+up8N7Zle/+WIrFLh35DAto6CQlC5Lf4Ui6NMcaYzr7wvzYSkmv7XsDwkYM6u4lJjuuIfVEajDHGqn+mWXKa+Xe1Ezp1GjZ1+jh/Nz5B2owITdG3NV6k6p9plizHbn1bWrp0Hj7to3E93IVlGqr+mVb9xYIVd9Z0lJBsK9++I8ePG9ajmTmLNO+9LVqrX2gVl4Y64ss2HPMJfykxxrrkvz5qxuM1n/FXsq7i56JLOLN97XhfNuU6aOmGH07Hacst/xpVWLFhpSUGAWOQJUnKBuyKVWOMsebJmjZsRJj13hKpxBhj9ZMv27BZ3svuaTAu9znRKSFDpJTNwB2RCowxxkX3Vrfjs7wW39boVymSJfD75GJWSUQOj7WihB1X3MihMcZYl/rvHB8O5Tr7QhHWB4xCpKz3tw8LMcYYF4Zv6WdDclp9/lCDMZZfme/BEnVceVPfFsuf7xxsTUkH/ZxUsrqQBLv5nLMZNMYY06m/jbAiBUND83DVRRY39C5tmHl4jDUpHH6oEJd0W93For44x4ll1m/Xi+KMqB590YbN6b71pQ5jA0tDWxIwOvvykrZitsuo/XFqI59N4W9BPE7njTH6nivmpDYfnJElVvGwBtQjwjooeKI7GyGEWJ7t/KSULHDe9KZchBBie3ZoKyOUckXF47m0E6FnCppO/XxqUx5CCCHBex+tXDi6g4W85OiM3W32Yn8LAiGEUOG53//Othm1YlEncwIhhEibPiv+10+UePSPW+ri0VkeU76Y3UqIEEJI2HL2t8F++Omx4890SHU99PcE2aiVSzrq2yK+19RVM5oXXvzrUn5JNbyeC5b1siQQQoiw6tLNh6WTFylxNYrk9Zj/WUlDaZsOTVlahVxVMqvVXixU8w/3njr9w1jn4tWU7ehiT2GFQvl6oZVdGsVLsOj+t8OD1j/x+fyvn8e7sav9YZVViw/O2BKr1fRB9ZBmFuZUyQs2m02aW8lKljjBYhv68LXPHz3VmPV+37f0TdJ24Bf7ByKEEFIhhEg772YlK5TuRWSUguXXtaOotD1h2el9b+p01PNM3NMKIUSIO/q35pa+TXl07mRL/xIVp6Wlz59n0opLq/v3WF/6tjo5SacSvkrXIXOEECLtfHxkJSsvwWaziWoUqUYIUQ4tfS1L13oWq/xqVu3FQtq06t1bnhR+/sjDZ9Ex0ZH3L5w4o0Jty3ZVZmkghBDC8vOLAg+lF5Da2PuPc3FLftk3q60WH1xJPRWWGATMxN70eWO5XIEEQoHRQwuCx+OVdIJVSjUm+YKyaxEhEAqI11t5gi8st44RQpGQ0Gq0GGm1WkRatwoY0FlSZoSBQaRVJymJkA4hRLDZLEMFv7FIxOFyarRmGx4Zp5/5LGjCxht55p7v+bVo1qz9tHEFS3eWvc1VdmnoqdOULTdeWvRqyoAtK9acG/RjH0lN6qhphZXGqrjEIGBvGdLSWoZyUlIVCJVsJ+nk28euZ3v0+qCl/kCPIMqOTOqSEpNp1KRkZdclJybrKE8rqX4AnfMysQCj0q2qMvFFKrLpZ0ORlva2XCLHJ3D+p36la4EmPz2jiG1h9Ya1qcoiRVU2rQn11a9mbAx3W3j+2Bc9bNkIIaT68/nynfHlRiIq1Coa+N3B+Z0sstaOPjhi7/++m95tlR8XNRw4B3vLsLy7drFUnA/9M6XkGF99/4dpoyZuuqWqPDLp0LmLO33vQGhE6SVy+fX9h6LIVu93LNlwKy/98ltCyeV/nHJ0/5kCi67dW7GRoGP39qzIIwfvll5618VtH+zm2u/7N34Jo0ZF1hrOfvY0hWg6eGI32+IYa2KeRqurvoFNsMzMRQQiLIesWdmLF75p8d74+v16TA1BwN42wt7zgttpTn067NP9VyNinl//Zd5H30dKB04ebGtgt8JqM+OT3qLwtcMnbv7n3vNnt49+OXLC9he2wxdO9Cg5hcBFl5YOnbHz3IOI+2e2T/9g1l9yvznzA8QIkY5jFk10jto8euSq0EuPo59d+XnOyBXXuL1nT2pBVZ5SHYqsLULq6WVNP/39h6NP0nIz4u8e+SJo8NqHOpybmq5+c2vSdcr6T/3UF9csP5phIJMEQSA669XL3CIlo98kg4C9dTgtFx/+Y/F7idsndWvh2ez9ySE5XVf9sX2M4VWXdP3w12Nf96FPfDqgbTPvjsNW35CO2nZiR5BNydjs1h+uHME+Nrdv6xZtAmbvT39v/sEjS/UHTYQ0YNOJnyZY3vxqfI+WXt7dP/xNGbD2WMg012qsFDUqsra43Zf9MNsnccdIX1upTZOun95oveXUxh78qE3dvedfefMXDjmt5n8zzTX992VrrxVV7rtlp7b8qM09rVxmna1GXGuvpvd2QPVdvxIWl08Xv6Bzom5euR2bV/o6N/rWldsx+td0xtOrV+4nKso01uQmPAq7/TA2Xf76RimdFXn9yp34AhpXoCtKfnrnxs17z9OVZYbSeTG3rj5MUmKszIi6f/Pm/ehMlYEyVZnRD27dDo/LkJe9JUtnPy9XP8bq5EdXrjxKKXtnyWCR2c8rFKlKCr9y5XGqxlC3VS4WjDGmFRmx4XcexmYq9YOKksJv3Y5IVRhaGvrvIma+HkDnxdy+fPlmVE6lJYYxVqZHhl2/+fBlAV1u+deowqoaYqxOfkRgeOgNAIyBQ0QAGAQBA4BBEDAAGAQBA4BBEDAAGAQBA4BBEDAAGAQBA4BBEDAAGAQBA4BB8HswpmRmZhp7SyAQqNVqrbZOX+OWyWQKhUIul795VOPEYnFRURFN1/4XHQRByGSywsJCpVL55rGNk0gk+fn5bx7POIqipFJpXl6eRlOdJ4/WcyUcDkciMfDbTtiDAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCBgADIKAAcAgCNjbSy6XN3QJoK4gYG+jtLS0WbNmBQUFLVu2rLCwsKHLAbUHAXvrqNXqlStXKhSKhQsXRkZGrlu3DmPc0EWBWmI1dAH/RSkpKf/8849EIunduzeHw6nwbmhoaHJyckhIiJeXl42NzaJFi86dO9enT58GKRXUEQTM1CIiIpYvX04QhFKpPHHixNq1a83NzUvfTUtLO3LkyJgxY7y8vBBCPXr08Pf337dvX7du3bhcbsNVDWoJDhFNKi8vb82aNZ6enqdOnQoJCcnLy1u+fLlSqSwdYffu3WKxeNq0aaVDgoODc3Nzjx492hD1grqCgJnU7t27tVrtunXrRCJR8+bNN2/e/OrVq3Xr1tE0jRC6cePGtWvX5syZIxQKS5u4uLgMHjz48OHDBQUFDVc4qCUImOlERUWdP39+5syZ1tbW+iHe3t5ffPFFWFjYqlWrTp48uXHjxs6dOw8aNKhCw+nTp2u12gMHDpi8ZFBXEDDTOX36tJWV1fDhw8sO7Nmz5zfffBMVFbV169ZWrVp9/fXXBEFUaGhtbT1x4sQTJ07ExsaasF5QD+Aih+loNBpLS0sWq+Iy79GjR9euXXNzcy0tLY21nTx58tmzZ9etW7d58+ayB5DgLQd7sLcCi8WqIl0IIQ6Hs27duuzs7KVLlyYlJZmsMFBH9RwwXVTI3KXHUw3eF9U8/XPLiWhd+fEjds9c+U82Rjjl6OKhgTP2Rr5+H2eeWj48cMr2R9o39qZ89uvmoy91BidhVMnIOO/MqtFrr76+kve6KuOtcGHYT1vPppvyBnCTJk22bduWm5s7ffr02bNnL168eMuWLWfOnMnNzTVhFaBmTLgH02VF3YvJoV8PoLVa5DZ40YcdJfqTDi4n796t2JJ44Jx7YQkUt+L5iIHe6Ff//JHdvq8TVXkSNaqnFFm2KsOtCFHbALubh+7ITfodC19f38OHDy9ZsqRp06Z5eXm3b9/etGnT+PHjN27cCLu1txNz52DqpMs//3jwVqKSa+s3dOZUn+db94cXFMUtP8CdrN1zRBRoczs0yf/LkWnfHbRbs7qfFCFC3MpP8uBW/AQvDwohnHc/LMPHz1l/Vo/zwg9t23chNkdF8527T53XK3N3cW+Cr0eRZ25adP5CiJP+2VQ6cLT9499//Pl8dDYtbTFw+qyhPrxXF3ZsPXQ/TUmYew+dO28A/2LJyPzFVhVKp1+e/C7Ubs3qfhbaRGOtBF+Pfb9lxu6r2e0DZIwtQwMEAkFQUFBQUJD+ZWZm5t9//x0aGnrx4sVevXoFBQW5urqash5QNaYCpos7siEkre/qHf1scy5vXrH+oOP3CyaEf3S355fjWsSHaJ78e6/N0i1T3XjRe1+3ISzbtZP/dTthnEcTChfcD0tv2bF7Qmw6Qoh+deaXc/zhG3Z3MZff/XHRwUu915f2hmJ+eWzuPYKLSId+JQN9Mk99vvWp37Kty1yU93at+G6Pw9r3LoRk9Vi/u59l1qk1i3+/1WNp6cgt5GeOGJmLohu/Gm1FIV0Lj5w/wlFAT/3ISqXy2rVr+r9dXV1tbGwq9EZRVD0vZYQsLS0nT548atSogwcPhoaGnjlzxtnZuWnTpvozOq1WK5fLi4qKuFxucHCwQCCo0JwkSQ6HU5fvOuqvebJYrDp+0YQkybr3gBBis9n6P0xcibGJMhQwOvneXXmHyX2duASy7Tq025FNdxLGNnldjVn7AX3dhBQqf7pEWLVvx/8u7OXoJq7yh3eSW3zgxU7Qj28/cNUWSiQk1fm5ci1SyhWlawQujE/Q2ncUlD2ew9n3bia1DlrhzicQv3VgL9mK+zG+iM5JeJ6QI23Sf1VIf4QQUqI3wRhV1Yqyd7Z8GY1QccByc3OXLFmi/3vSpElz586t0B2bzX7jJGuHz+dPmTKlQ4cOn3322cuXL1++fFl5nPHjx1fOfH1VxePxeDxeHTsRi8V1r6TyRsQ0lWi1Bi8VMBUwXJBXZG5loQ81KbOSFkbllznbIaWWFoYCT1i3a8f5LuzVSOtXtxN9+jRll6wo2vSwkF1/PsggpQ62SIulZaZUWFDEE/LLnS/RuTm5hWG7F0WXfI9W6ifsMmxu2s+Hvp65VWfX5oMJH45qU9U1u5JyRF2mzU0y3oot4Ktef7vCysrq+PHj+r/FYnFOTk6F7tRq9ZunWStRUVE7duy4evWqWCwOCAho2rSpmZkZRVE6na6goEClUlEUZWlpWbkkoVAol8vruAczNzcvKiqq49yJRKI6/jCHoiiJRFJQUGBsXWe0EhaLZTCWDAWMEEkEeVm5NHIgEaJzsvKEYnHZDFS6l1qMsmvfltp8K8YxKaGZf3MOoQ8YzrqwZ39G56+2DXDg4tTjn32VV3ZKIqEyRVFuDSHFYpF5l3EbP2rBQgipMhOSsbRQqRi48NuxOP/FzV/Wf/9b091zvd84F1iZq3KuopVWruSIXtdOUQ4ODqUvMzMzK3Sn/z5UPcrJyQkPDz9x4sTVq1etrKyCg4N79+5dxR5Jp6t4gRVjTNN0XQrTHyJijCt3XiN170GPpukGqcTY8T9DVxFJh9ZtuDePnU9SI13GzWOXle+1daMQprXaN2wrSfv2bdCNvcdjmnbweX0FUavRUBKZGQfReRFnryeotTqEinsjRC7OVEpyyZEbprVaTFj6tZXcPvJPvALjwmeH1n71d0L6pS2fbb+SoWOJbeykXIpARGkPxuGMKlvpUpIyHd3rtJxqLjo6evXq1UOHDu3cuXOfPn0WLlwYGxs7a9asn376qV+/fswdhYLaYeoiB+UxfNHEvdu/nPmbim3Vauj/xrfgsOM87J/sWhwi/KiqhqRjhzbo0EmPoS14COXrhxHW/qO6h+2cPyvUzKp5z/c7kX/s/L3zx/rexBvHtPHOuvpc1b01F7HtSwaO/XRq7g/rZx9WklKvD+bNbutB8AI27Vw0JYTkSFy7z57jx0Z0ycjL7ZAmbMvEkVuLK5D1Ht66uJaASUZbbZxo+yxa7GfSn2kdO3Zs3bp15ubmHTt2dHd3Nzc3d3BwcHFxMWUNoEaIRvBrWd2L39eccF08p309nN5WH5187OtDVvPmdxEbPtytfIj47bffJiUl/fLLL7Wb4JUrVxYuXNirV6/g4GA2my2TyRQKRR2f2yEWi4uKiup4iCiTyQoLC8v+6KYWJBJJfn5+XXqgKEoqlebl5Wk0GtNXwuFwJBJJ5eGN4atSlPPAINGN80n1fIZTNXn4vy/8RnUykq6aiouLu3z5chVpyc7OXr16devWrRcsWADHge+QRvFlX0LQctIcb9qkGwt+ywlz3mPVaJISieT27dv5+fllN3UY4x9++CEkJARjbG1tvX37doOHfN9//71Op/vkk0/qeJMHmFhj+bQIFqv+7+JWOUGKRdVw7xUYGKhUKn/66aeyA3fv3r1v375x48Zt376dzWYvXLhQpVJVaPj8+fNTp06NGzfOwsKijmUDE2ssAXsXWFlZjRw58tChQxEREfohp06d2r1795gxY8aPH+/m5rZs2bLExMS9e/dWaLht2zZra+uBAweavGRQVxAwkxo1apSLi8uiRYsePHhw5MiRL774olu3bhMnTtS/6+7uPmTIkP3796ekpJQ2uXv37s2bNydOnAinXu8iCJhJsdns1atXCwSC6dOnr1271t/ff+HChWV/wjx27Fg+n79582b9S5qmN23a1KRJk+7duzdMxaBuGsVFjneKlZXVnj177ty5Y25uXvmb70KhcOrUqZs2bbpw4ULPnj1DQkKioqLWr18P1zbeURCwBsBms9u2bWvsK3N9+/a9cePGypUrz58/f/bs2aFDh/r6+pq4QlBfYLv41iEIYunSpT179oyIiBgzZsyHH37Y0BWB2oM92NuIx+MFBwc3dBWgHsAeDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDAAGQcAAYBAEDDRCz549KywsbOgqEIKAgcYnMTFxwYIFv/zyS0MXghAEDDQ+z58/RwhFRkY2dCEIQcBA45OamooQSklJaehCEIKAgcYnMzMTIVRQUKBSqRq6FggYaHRyc3MpikII5eTkNHQtEDDQ6OTn5zs6OiIIGABM0Gq1MpkMIZSXl9fQtUDAQGNkbm6OEMrPz2/oQiBgoDHi8/kcDgcCBgAjCIIQi8Vvw5c5IGCgcTIzMysoKGjoKiBgoJGCPRgADJJIJBAwAJgCezAAGCQSiSBgADBFIpHARQ4AmCKRSORyeUNXAQEDjZRIJNJqtQqFomHLgICBxkkikSCEGvw0DAIGGicIGAAMEovFCKEGv84BAQONk5mZGSoTsLS0tKSkJNOXwTL9JAEwgbKHiBqNZsGCBRqNZv/+/Twez5RlwB4MNE48Ho/L5ep/sRIZGZmdnV1QUPD48WMTlwEBA42WmZlZacA4HI5AIIiOjjZxDXCICBotqVSqf2pAfHx8kyZNWCzWixcvTFwDBAw0WlKpVL8HS0hIaN68OSp5JqkpwSEiaLQsLCyys7Npmn716pWbm5uTk1NycrKJa4CAgUbL0tIyJycnIyNDrVa7urra29vL5XITP6gDAgYaLSsrq+zs7Pj4eISQm5ubg4MDKnmwtslAwECjZWNjo9Pp7t+/z+FwHB0d7ezsEEIZGRmmrAECBhotJycnhNCtW7fc3d0pirK0tGSz2bAHA6B+uLi4sFis9PR0Hx8fhBBJkra2tmlpaaasAQIGGi0Oh9OyZUuEUJcuXfRD7OzsTLwHg/tgoDFbunRpWFhY165d9S8dHR3v3btnygIgYKAxc3Nzc3NzK33p6Oh44sQJmqZJ0kTHbnCICP5DnJycNBqNKS8kQsDAf4irqytCKDEx0WRThICB/xBnZ2cOh6O/9Wwa71rAdEl3/32QRiOEVAnndq796lCEGiGE06/+cS5RV+bdGnSFi+7u+yL0kbrMOwknv/v5dj6uohUuenjsr6cN/MQiUFMURXl4eMTExJhsiu9awDRx5w5ceqFDSBtx4sALz9EfeLARzrseeoPfwpF6/W7NuspOePoir0wsSaF9c3dLDlFFK0LYzC3tz2Ox2vqYKWBCLVu2fPLkCcYGN5/1r4GvItJJZ7efpb2Ju+eitLKWgyf20J078M9zpWXrwHEDm0sIpMt4ePKvSxFJ+aSsaY+gQKeIHb9HFOYnf7XjoSzybl6WeN9JrxWjZRfOKNt9aoNTzunfXXtYsmy4Z27433+ee5yG7fz6BfXzkRLyuEtHTtyMz2fb+Q0YOaCZ/HzJyOLZkgpVYUXq8zh1l25NeMhoK8myof7Oh07eHxLcXtAgiw7UTufOnQ8ePBgZGan/AQvTGngPhpVpT/8+eE0y6KPJXdC5r+esuSbrN3FEs7Q/dp58QSOceXbbpmtU+6DxY3paPN7+43mq6+QhTYUtRiyYPGnysBZC76CFw3xYqbfDkG9LCUHadtO/O2+wp/L+ruU7o2x7jBjWkX3t2zWHYovCQ9YezW81dPyI9up/1++7q349sleljQyWp0THZ2sRUhtv5UlR7n4usTefNMRiA7XXoUMHOzu7PXv2pKWlaTSa6jTR6XQFBQVxcXHHjh1bs2bNr7/+Wv3JNfx9MNK2x+jBLV0ozfvN92V4ju3dzBrZdXY/EZ1DIxeO16CFvi18HXhIR7WQ3sjMY/G4LILFFfC4iMsiKa6ASymjnuc7DZYSCCFO8bts+fXTYa5jtg5sLSKQx7T4O99dfixJVco6Nvdwt2k2ZZlDBpciSkbmkEafr4yL0oy2ohDCzu6y2EiE2uvHTk1NHThwoP7vSZMmzZ07t4q5FgjqYb8nEAjq3g+Xy617JSKRSCQS1bETS0vLuldiZmbGYlW1VlMUNW/evCVLlkyaNKl2k0hMTJw/f36FgVqt4bOFtyBgQpGQQAgRJEWJxWICIUxSFIEQQoTYVpZzfO83zxOS0vLyclm9DDSn83Ly+WbicudLdEZSiiL66NfLTxMIIW12dpY77hAUcH3T3CknmrRs837A4AA2Qm8+VSPMOwYFXDbaihBIRIURpS8lEslnn32m/9vLy6uKR15yOBytVkvT1bwaY5hQKNRoNGq1+s2jGsfj8VQqVV1OSAiCEAqFKpWqmnuDKipRKpV16YEkSYFAoFAo3rhgT506JRaLhw0bJpPJKr/LZrMrz4tKpUpLS3vw4EFsbKzB/9tCkqTBYDd8wIzDRbd2rPmDNWbm9HEetqozK9fkGBiJ4HDZWrmm3BpCsLlcWceJS8d6UMVDKK6A2+nrPUNTox/dvXT0u1VZy7+f6PTmCgizVuOraEVrNBSn9JVAIAgKCip9mZmZaaxbkiTVarWxbV41CYVCrVZbx5WSzWarVKq6RF0fMI1GU8dKOBxOHXugKEogEKjV6qpnJyEh4cqVKwsWLAgICDA4gkQiqeJHmQqFgiTJyqVyOByD47/NVxFxTlIKt1XvHj4OZpyC6KhU/WKrsLklJHY2moyskh0Lxhgh0rapl+bR3ZeILxDwVXe2zt905dHBxQsPxHJsm3UaMKa3W25ahrZyV5Xo4g5V1YrOSs+1tq/nmQYMu3TpEpvN9vf3r11zPp9fo4Pqt3kPRtq1e99i9dbVuZ78nFyu2Dznxp+Xu/YSk0+ObP/X8iNp8Vjspu+5HYh8oWvvSSFKWPzurBEftfrq2/lLXJ1wUqJw4BJ/X5ZK9PlXn0Q1s1W/fEEM/sSPWzqybDyBtJF/frPmkn5rQ0j82upPbCjnTt2MtU60jf4AABLnSURBVLKc3dc6OlrrM6KBFg6opfv373t7e5vs8aOEyW4IGISV6bHJpLO7JQfhgqSoHJGnsxmJdLkvYotkng4iAumK0l+kKMT2jlY8RUpsGuXobiZPiM/iO3sKs5/nSpo6SQikfLDjq8c9V030ohBSZcXHZ/GdPW0FBK3MTnqVQ1g6OZhzCIQQVua8epWh4lk5OUi5BEKlI7tzM54nFZQuBoJtYW0ml3NdXaSsKlp5CsI2bs4bv2KIncH7ZVUdIuqPZOp4iCiTyRQKRR3/BZZYLC4qKqrjIaJMJissLKzjAV7VB2bVQVGU/jltH3/8sZeX16pVqwyO1qdPn759+06ZMqV+K+FwOPpnCVfQwHswgmft4V78p9ihqVj/J2Xu4mVe/KfQ2t1D/6fIzlOEEEJ8t2YyhBASNCsendcqsMul42EFnp3EBFdW/C5CJM/CycOi7LSkTh5SVEbpyC4+5YaXr9BwK13in/dkQz62NZwu8HbKzMzMyclxd3c32RTf5kPEaiNt+04OSNRihEy2umMN22/saFcB5Oudov8WorOzs8mm2CgChhApdXUx6QQJnq2bnUmnCOrBy5cvSZLUP17KNN7mq4gA1BVN07m5uaUvExMTZTKZsUvqTICAgcZs/fr1/fv3L30kfVJSkq2trSkLgICBRgtjfObMGbVa/e+//+qHQMAAqDcpKSn5+fkcDufhw4elQ2xsbExZAwQMNFr6RwO0adMmKioKIVRQUFBQUAABA6B+6P+XSocOHXJzc7OyslJSUhBCJj5EbCSX6QGoLCMjQyKReHl5IYQSEhL0/xDd2tralDVAwECjlZmZaWFh4ejoSJJkfHy8Wq1msVj18quz6oOAgUYrMzNTKpVyOBwrK6uEhASapq2trSmKenPL+gMBA41WTk6O/ieVzs7OcXFxFEXZ25v650VwkQM0Wrm5uWZmZgghNze3mJiYuLg4/T80MiUIGGi0cnNz9T8h8fT0zM7OTktLa9KkiYlrgICBxkmn0xUWFuoD5uvrS1EUQRC+vr4mLgPOwUDjlJ+fjzHWB8zc3HzGjBlqtdrEd5kRBAw0VvpfJZc+TG7w4MENUgYcIoLGKS8vDyEkFosbtgwIGGic9I8urPvjUOsIAgYaJ/0eDAIGACMKCgoIgoCAAcCIwsJCPp9vsv/FbAwEDDROeXl5DX6FA0HAQGNVUFAgFAobugoIGGikCgsLG/wEDEHAQGOVn58Ph4gAMCU/Px8OEQFgSkFBAezBAGAKXEUEgCkajUYul0PAAGCE/ntSBv9hl4lBwEAjpP+HD/rnBTQsCBhobIRCof6ZvhAwAOqfVCotKirS/9HQtUDAQKNjYWGBEGKz2XCRA4D6p384trW1NUE0/H/4hYCBxsbFxQUh5Obm1tCFIAQPvQGNj4+PT//+/Xv27NnQhSAEAQOND4vFCg4ObugqisEhIgAMgoABwCAIGAAMgoABwCAIGAAMgoABwCAIGAAMgoABwCAIGAAMgoABwCAIGAAMgoABwCACY9zQNYDa2LVrl5+fX7t27Rq2DI1Gs2PHjt69ezdv3rxhK8nOzj5w4EBgYKCTk1PDVlIW7MHeVQcPHgwPD2/oKpBGowkJCYmJiWnoQlBeXl5ISEhKSkpDF1IOBAwABkHAAGAQnIO9q5KTk0UiUYM/W5Om6ZSUFKlUKhAIGrYSrVablpZmaWnJ5XIbtpKyIGAAMAgOEQFgEDyT451Cpz24mevRualY/zwyXBR5/Mddfz/KJG1bD/14Zj93HrOTx/KYG08FndraF2+XdanX9/5w4EaCUujRffKc8W1lpLGB9TP5nIgbr2w6+1oWP41N9eLszu2H7yXppN4fTJ8zzEdM1GigScAe7B2iSb9+YPvRx7klB/WayENbTrGC1u75aVUf+R9bjyXoGJ08lkcf37XrSmLJVHDm+V0/xbSY/8PPW2Y43/9x780CbGRgvdDlPTq8Y//tdLr4NZ14Yutvud2W79z7zSjhue9Dn6hrNNBEIGDvBlwYtnPuh8Gbr2bSpcN0sTfvsLoO6mTF4dj3GNi+IOz2K7qKLupEl3B81Yzpy36PUr4uKf/hrWjPfv09BSxxi0F97B/deKIyPLAeJh/x68LpM9ecevV6E0KnhN3Obj2wtxOPLWs/yJ9/72aUrgYDTQUC9m4gRO1nbA058NUgm9efmColOcfGyZ5CCCGWvZNNRkoaYysO5Tpk1a5f985uzS4dRKcnp5s5OggIhBBh7ujASU/Jog0OrIfJ+4zfuPfAlvGe1OvJpyWlWzvZsxFCiLJ3tC1ITZXj6g+se03VAwF7Z2GVSk3xecVrPI/P0yhVjO3BDFEp1Tw+T382Q/D4PI1ChQ0PZAJWqTQ8Pl//guTzOSqVqgYDTQUC9s4iuFyOTqnU6F8pFUo2l2vSj5PL46hK4oOVCiWLxyUMD2QCweVyVMriI1ZaqVBzuJwaDDQVCNi7i2tnL01PStUhhJAuLTnDyt6GelObekRa21vnpaQoEUIIF6SmamzsZKTBgcxM3sbBKiMpVYuQ/nBRbGcrJKo/kJGaDJVpqgmBeke5d2ynuXHmcQHGOXfO3BG17+Boyo+TkLzX0SPq7MUkLVLHnz2f1LKzL9fwQEaQdu07SO+fuZlF46KnZ67J23bypGow0FTgPtg7jOM9bvHAH7ct+XgHMvcdu3CYqyl3YAgRln3mzkrdsn7u32quY/f58zqLCYSQwYFMIJ0CP53w05ZVs0J1Qs8Bi2f7cms00ETgq1IAMAgOEQFgEAQMAAZBwABgEAQMAAZBwABgEAQMAAb9FwPWUsTX47JIksUtfiFqufyO8s7S5qKg3wrreYKKOyt7jAxJrt4XBbXM1GBidOy3XUTdt740PM/yawv9x/+eZvgGUeGlT32EIvv2K65pmKywFrQPVrQQ9f85qyY3tv6LN5ofFSoQQggp/xghnajbm/HnGFHxOzhPvONIkSe/Xieni9n5v5Md1t6wr97GjPKaVP81vGUEnReM+/qDLy8O3Nqz0oM8tM/+Pfmix7aXJyZbmOz7TAz6L+7BqkByBUI+m0BI/vL+9WeZ2tyo6+cv3nz0qggjhLAi5emdsEcvcsttWXVFKZH370W8KjDyUxFV2M7d+UPGteUiVL1uS2tACCGE1Tnx4XfD43O0+tdFL+7diMzCSJsdGfa0eFtKy5Of3rl1JyKpqNwOQ1eQ/Pz+nYfRafLygw0XXHFCxnrWzwKtSH545cK1+9EZyrKd6IqSn967F5VR4Rv0lSoh7YPGe53Y9md6hZ0Bzo25dSeugC56ef9mVI7RuTO0EKpTXsV5x5nPrl19nPp6jhWvHly9FaP/Ras2/+Xj2zdu3o/KUNbluxj4v0vx+3Aeb2howeshmrAlzYRDQwuwNuLLNqLOY8Y0l1o5OZixWfYDNvz23ZAmVg5OMh5l3n7l9UKMMdYkHAnuYMVmCc0lXErkMXTDjWy64kRUl+a6t/jsrgZjjKvVbWkNGMuf/DS2uZjiiM0ELJ7LgA23cmlt+Kr3LMZsD53a1MKm27qHGqx49vOkFmYUSygRskiJ94Q9EQqMMS56+MOIpmK2wEIm4bIt2wYfT9JVUbCBCWEjPWsjvmwj6f+/lf5WIhtnBzMOz3nIjmdqjDGdeWl1LwcOweLzOVzHPjNH+gr8v3+hM1IJpjN+HmDRf09a+QWmebB5eBsnPmXt4z9k/W21sRoqLoTXjJZncN51cZu68p1mnVfqG9M5h0ZaSIeFZurybn7Tz5nPElhYSfkslmWnzy5k0Rhr7i/3Efbbm1npQ64CBMxowNjsZjNOJGkwnXVquitFyj74PqII46KHq9vxbKb/q8La55u6mTkP3xGeq8NY+fLUJ23FTlP/zqmwxoR/3sp64l9y/avqdFtag/reylYC19H7nhXSWPni8OQmvFarwpXhq1rxzNyHbriTrcMYax5/1VZg3Xf9rSwt1mbdWt/XWtD2y0caOu3nAWLb4fvilRhr009Od+e2WhWuNVawwQkpDPesnwXSsu+3D/JpTOdeW+TLdZh1XoVz/57qwHEbtedRnlZXGHlgoieb4Ph//0JrsBKMMdY+/qK19bijBbgC9fVPmwhH/KE0PndYW34hlGWsPCPzro3f3E3gGnxZhXFxvqzHHc3TvdjWQ+A0NjRBiTFWxu8bbiscuC+TrlXA4BDRKLbf5AX97FmIsHjfvxXHYkjwR94ChATe/h2tC3PyaF3Mn6Fh1n0Hexc8uXn9+t2Xkt4BvhmnTtwpf2auiXqWYOfmwq52t69b3g0NjWq7YN2EZkICcZ2HfrF9w1hvkkYIYYvBC4LbSkmEtBF/HHzSZMY3CzpYUIiy6LBg3UfuT34/EqGlNVodLc/JLNAgyqrfD4/Try72RkYKlhuaEP3YSM8IIUS6jl8x5z0xgQizdh+8b1mUX4iLLoQezeu5bNMUXwlFCpuOWf9ZgIhACCFDlVAIIUS5uDvJnzyKN/4jbKNzh8othEoMlGfsw9I5Bw5rl37y+F0NQjjvzJHz/MHj+0hIy8Ct1y9uHenCRQhxLJxsRXRRocLIcaIi8d7F8xVcuPQko/iT/C9e5KgmQiQR6z8/kqJIM6lZ8YdJURRCCNGpyWna7Ou7VsaULkNOp1b25b+ojXMys3SS0qbV6LaUMj422dzb2674bdKpz5zFCOkeHUGUi4ebfpq6xIRXVDNfr5IKWF6+zagfE17RtmPXbrg4ZWVnu5V2Lbv0CAicNHNyD56Rgg1OSPX33wZ71iE3hFjOTVyK3yBIiiIQojNeJiodurS0Kj51JGTvtXalLiNEGKpErJ+4uZSXl5VDI2TkRwDG5k6HnFCZhVBJ5fKMf1ikU+Dw9p9tO/5gXSevM4fPS4KO9BAihCxFWbvXTjt7/1lsbHy6CsnpFoYnhRCde2vf1z8+0ZYbSHB7rOrSwopEELDaI6UyKcd7yq/n57mUPMRMJVeTvHI/liVEYhGhkNfmERAsHo9SFilKd2m6/OSX+QI7hBDB4RRfAyH4Aj6dnl+EkYBACCGsKCikuZZcAgn9ZoU+nP5j7L0rly6c2r+mX8j1gw8+NVwwOrG98oRYLGM9I4RQ8WpbZj6FQgHKz80vswNWqfUzbaCSRyGBMgLRiiI114Zv/FKh8bkrtxAqq1ReFR8W6Th4ePulPx4PX9jq8EWrkSc7cxHKPx3sP/xSu+VrPv+0QwtP+6ytXf3+MVYkKe08baV1XvnbEQRl7V2cLDhErC3Kq2sXywdHjsToN144569pHo4TjuSVzxLf0VmWkZxei2dlcP06+qku/XUxX/8y//SC9q1mHS/fPdu3U1vOraMnim+x0UnH/7zFbtepJbqyolunuccLzZp0HDztsx9//rRtTtjtF00MF8wxNKFTzh0N9sxGBhEW7Tt5ZZ/67VzxI+UU9/48GadDCGkMVRKnQwjRGSnpyM3Txfhv2IzNnZEaqlLFh0U6Dh7e/uWJ/ZsOXnQYNaY1GyHt88tX0lt/vGHxyG6+LhY8RWx0Fbcw6eyr25ctqWhF6OPiUwXYg9Uaz//Tz3t0nhvQL2bqwGYo/Nfv/7Sdc2aQtPy2k93av6N8871E2t+9htsy0nXSyum7Bk/oow0e15YXfXjLQbMPTw2VEZvKjENYD/9s3tY+wb2HPZ/W0yr9/E8/XvVceHa4NbvQ1z5+4pzh+MnQFuZ5Dw9ue+A2fp2PqJPBgimBgQkFNW/XfN62yj0TKNNgtZTvjBUj944d16Po47Ftec+PhtwmnFgIIVYzQ5WwEEKq8LuRzbu/L6tiD2Zk7giUWrNFiar8sEiHwcM7LJz3bWzrL9a2YCGEqCadOlh8v/N/35gHOsqfnd5/9IZSS1w7fmfYdAOP8iDtR++8Mtr4hP/LezDSyqdbtxbWZTahhMS9fbcW1hQihC5tur5nX7xAKesWXTs0KT5ZIsw8Onb1sSIRotynHrr+x5zmObdPn41gD9hy9cyqjsKKExH5D+qWcPFyBkYIVavb1zWY9/r20oVv+wujLpwOK+q4+tzF9f4SUuTatmtLu9JPWtBh1dmru8dYxZ7/+0Kc9bifrp39vIMAEdYjdl/4daZX+o2/jp2JQD2+Pn9x3fsCYwUbnBBhuOcKs4AIc8+O7ze3JBFhO2z31VNf9RPHXL7whD/6l3+/n9TzPQceabgShFR3z99y6NfPo9IOjDRr0qGbjxVpfO4QUWEhlGGsvKo+LNJ+yIxp/t0mBI/RP0qAsBj0/ek9o8T3jhw8/ZQb+NO1y7s/aZ1z9mKcTuTWvmtLW6OHpobAL5oZJz83q82Glmf/mWnSJ2a85RTnPvbb+N7ZUzOcGvlCaeSz9zYQ9Fy8gHNg+13TPYvvrUe/+u2Hx4ErJzT2dCEImCmQrtM2fyKLi33bvrvaYHBmpHzAt8s6N/A/FDMJOEQEgEGwBwOAQRAwABgEAQOAQRAwABgEAQOAQRAwABgEAQOAQf8H+zXvsb8lBJkAAAAASUVORK5CYII=" /><!-- --></p>
 </div>
 </div>
 

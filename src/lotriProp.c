@@ -1,15 +1,15 @@
 #include "matlist.h"
 
-SEXP getLotriProp(SEXP names, int i,
+SEXP getLotriProp(SEXP names, R_xlen_t i,
 		  SEXP lotriProp,
 		  SEXP lotriPropNames, const char *prop) {
   const char *what = CHAR(STRING_ELT(names, i));
-  for (int j = Rf_length(lotriPropNames); j--;) {
+  for (R_xlen_t j = Rf_xlength(lotriPropNames); j--;) {
     const char *cur = CHAR(STRING_ELT(lotriPropNames, j));
     if (!strcmp(what, cur)){
       SEXP lotriCur = VECTOR_ELT(lotriProp, j);
       SEXP lotriCurNames = Rf_getAttrib(lotriCur, R_NamesSymbol);
-      for (int k = Rf_length(lotriCurNames); k--; ) {
+      for (R_xlen_t k = Rf_xlength(lotriCurNames); k--; ) {
 	const char *cur2 = CHAR(STRING_ELT(lotriCurNames, k));
 	if (!strcmp(cur2, prop)) {
 	  return VECTOR_ELT(lotriCur, k);
@@ -22,8 +22,9 @@ SEXP getLotriProp(SEXP names, int i,
 
 SEXP blankProp(SEXP names) {
   int pro = 0;
-  SEXP lotriProp = PROTECT(Rf_allocVector(VECSXP, Rf_length(names)));pro++;
-  for (int j = Rf_length(names); j--;) {
+  R_xlen_t len = Rf_xlength(names);
+  SEXP lotriProp = PROTECT(Rf_allocVector(VECSXP, len));pro++;
+  for (R_xlen_t j = len; j--;) {
     SET_VECTOR_ELT(lotriProp, j, Rf_allocVector(VECSXP, 0));
   }
   Rf_setAttrib(lotriProp, R_NamesSymbol, names);
@@ -42,7 +43,7 @@ SEXP _lotriMaxNu(SEXP lotri) {
   SEXP lotriPropNames = Rf_getAttrib(lotriProp, R_NamesSymbol);
   SEXP names = Rf_getAttrib(lotri, R_NamesSymbol);
   double maxNu = 0.0;
-  for (int i = Rf_length(lotri); i--;) {
+  for (R_xlen_t i = Rf_xlength(lotri); i--;) {
     SEXP nu = getLotriProp(names, i, lotriProp, lotriPropNames, "nu");
     if (!Rf_isNull(nu) && Rf_length(nu) == 1){
       double tmp=0;
@@ -56,16 +57,16 @@ SEXP _lotriMaxNu(SEXP lotri) {
   return ret;
 }
 
-SEXP addLotriPropertyAtEnd(SEXP lotri0, int i, SEXP sameC, int *nestI, int extra) {
+SEXP addLotriPropertyAtEnd(SEXP lotri0, R_xlen_t i, SEXP sameC, int *nestI, int extra) {
   // Here we found the lotri property,
   // Create a new list with "same" at the end
   int pro = 0;
   SEXP curProp  = VECTOR_ELT(lotri0, i);
-  int curPropN = Rf_length(curProp);
+  R_xlen_t curPropN = Rf_xlength(curProp);
   SEXP curPropS = PROTECT(Rf_getAttrib(curProp, R_NamesSymbol)); pro++;
-  SEXP newProp  = PROTECT(Rf_allocVector(VECSXP, Rf_length(curProp)+1)); pro++;
-  SEXP newPropS = PROTECT(Rf_allocVector(STRSXP, Rf_length(curProp)+1)); pro++;
-  for (int k = 0; k < curPropN; ++k) {
+  SEXP newProp  = PROTECT(Rf_allocVector(VECSXP, curPropN+1)); pro++;
+  SEXP newPropS = PROTECT(Rf_allocVector(STRSXP, curPropN+1)); pro++;
+  for (R_xlen_t k = 0; k < curPropN; ++k) {
     SET_VECTOR_ELT(newProp, k, VECTOR_ELT(curProp, k));
     SET_STRING_ELT(newPropS, k, STRING_ELT(curPropS, k));
   }
@@ -85,15 +86,15 @@ SEXP ampDefault(SEXP cur, SEXP dimn, double val, int pro0, const char * what) {
   }
   int pro = 0;
   SEXP names = Rf_getAttrib(cur, R_NamesSymbol);
-  int nDim = Rf_xlength(dimn);
+  R_xlen_t nDim = Rf_xlength(dimn);
   if (Rf_isNull(names)) {
     if (Rf_xlength(cur) == 1){
       SEXP ret = PROTECT(Rf_allocVector(REALSXP, nDim)); pro++;
       double *retD = REAL(ret);
       Rf_setAttrib(ret, R_NamesSymbol, dimn);
-      double val = REAL(cur)[0];
-      for (int i = nDim;i--;){
-	retD[i] = val;
+      double inVal = REAL(cur)[0];
+      for (R_xlen_t i = nDim; i--;) {
+	retD[i] = inVal;
       }
       UNPROTECT(pro);
       return ret;
@@ -102,13 +103,13 @@ SEXP ampDefault(SEXP cur, SEXP dimn, double val, int pro0, const char * what) {
       Rf_errorcall(R_NilValue, "'%s' needs to be named", what);
     }
   } else {
-    int nnames = Rf_xlength(names);
+    R_xlen_t nnames = Rf_xlength(names);
     SEXP ret = PROTECT(Rf_allocVector(REALSXP, nDim)); pro++;
     double *retD = REAL(ret);
     double *in = REAL(cur);
-    for (int i=0; i < nDim; ++i) {
+    for (R_xlen_t i = 0; i < nDim; ++i) {
       int found = 0;
-      for (int j = 0; j < nnames; ++j) {
+      for (R_xlen_t j = 0; j < nnames; ++j) {
 	if (!strcmp(CHAR(STRING_ELT(dimn, i)),
 		    CHAR(STRING_ELT(names, j)))) {
 	  retD[i] = in[j];
